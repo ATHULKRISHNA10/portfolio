@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Athul Krishna K S — Software Development Engineer</title>
+  <meta name="description" content="Athul Krishna K S — SDE at Lumio. Backend systems, cloud, and scalable search." />
+  <link rel="icon" href="assets/clover.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/motion.min.js"></script>
+</head>
+<body>
+  <canvas id="cosmos"></canvas>
+
+  <!-- ====== NAV ====== -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="Home">
+        <img src="assets/clover.png" alt="Logo" class="clover" width="32" height="32" />
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#expertise">Expertise</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+          <svg class="ico-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="ico-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ====== HERO ====== -->
+  <section id="hero">
+    <div class="hero-planet-bg"></div>
+    <div class="container hero-grid">
+      <div class="hero-left">
+        <p class="hero-hi"><span class="gold-script">Hello,</span> I'm</p>
+        <h1 class="hero-name">Athul Krishna K S</h1>
+        <p class="hero-role">Software Engineer building scalable systems for search, discovery, and cloud-native products.</p>
+        <p class="hero-bio">I design and ship high-throughput backend platforms across AWS, GCP, and Azure — from search engines and recommendation systems to metadata pipelines, internal tools, and large-scale integrations powering content and commerce experiences.</p>
+        <div class="hero-btns">
+          <a href="#contact" class="btn btn-primary">Get in Touch <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="#about" class="btn btn-outline">Learn More</a>
+        </div>
+        <div class="hero-social">
+          <a href="https://www.linkedin.com/in/athul-krishna-k-s-7953b71ba/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="https://instagram.com/athulkrishna____" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="mailto:krishnathul476@gmail.com" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="photo-card">
+          <img src="assets/profile.jpg" alt="Athul Krishna K S" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== ABOUT ====== -->
+  <section id="about" class="sect sect-mercury">
+    <div class="sect-bg-planet mercury-bg"></div>
+    <div class="container">
+      <div class="sh"><span class="sh-tag">About</span><h2><span class="gold-script">Who I Am</span></h2><span class="sh-line"></span></div>
+      <div class="about-body anim">
+        <p class="about-lead">A backend engineer focused on building scalable systems for search, discovery, and cloud-native products.</p>
+        <p>My work spans backend services, search platforms, metadata pipelines, recommendations, watchlists, and internal tools.</p>
+        <p>At <strong>Lumio</strong>, I work on <strong>TLDR</strong>, a content aggregation platform across sports, music, movies, and shows. I've contributed to search, recommendations, favorites, catalog enrichment, and integrations with multiple external data sources.</p>
+        <p>Previously at <strong>Zee5</strong>, I built a search system handling 500 TPS and saved 70% in vendor costs by bringing it in-house with Solr, delivering more reliable results than the external vendor.</p>
+        <p>I also work extensively with cloud infrastructure across <strong>AWS, GCP, and Azure</strong>, and have deployed internal tools like Frappe, Formbricks, OpenProject, and Typesense. I'm a <strong>Google Certified Associate Cloud Engineer</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== EXPERTISE ====== -->
+  <section id="expertise" class="sect sect-mars">
+    <div class="sect-bg-planet mars-bg"></div>
+    <div class="container">
+      <div class="sh"><span class="sh-tag">Expertise</span><h2><span class="gold-script">Core Expertise</span></h2><span class="sh-line"></span></div>
+      <div class="exp-grid">
+        <div class="glass exp-card anim">
+          <div class="exp-card-head">
+            <div class="exp-icon-wrap"><svg class="exp-anim-icon" viewBox="0 0 40 40" width="32" height="32" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="17" cy="17" r="10"/><line x1="24.5" y1="24.5" x2="34" y2="34" stroke-linecap="round"/><circle cx="17" cy="17" r="3" class="search-pulse" fill="none" opacity="0"/></svg></div>
+            <h3><span class="gold-script">Search & Discovery</span></h3>
+          </div>
+          <p>Building search platforms, recommendations, favorites, and watchlist systems for richer user experiences.</p>
+        </div>
+        <div class="glass exp-card anim">
+          <div class="exp-card-head">
+            <div class="exp-icon-wrap"><svg class="exp-anim-icon" viewBox="0 0 40 40" width="32" height="32" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="4" y="8" width="12" height="8" rx="2"/><rect x="24" y="8" width="12" height="8" rx="2"/><rect x="14" y="24" width="12" height="8" rx="2"/><line x1="16" y1="12" x2="24" y2="12" class="api-line1" stroke-dasharray="2 2"/><line x1="10" y1="16" x2="20" y2="24" class="api-line2" stroke-dasharray="2 2"/><line x1="30" y1="16" x2="20" y2="24" class="api-line3" stroke-dasharray="2 2"/></svg></div>
+            <h3><span class="gold-script">Backend Engineering</span></h3>
+          </div>
+          <p>Designing APIs, schedulers, integrations, and scalable backend services.</p>
+        </div>
+        <div class="glass exp-card anim">
+          <div class="exp-card-head">
+            <div class="exp-icon-wrap"><svg class="exp-anim-icon" viewBox="0 0 40 40" width="32" height="32" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M4 10 L12 10 L16 6 L24 14 L28 10 L36 10" class="data-wave" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20 L10 20 L14 16 L20 24 L26 18 L36 20" class="data-wave2" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/><path d="M4 30 L14 30 L18 26 L22 32 L30 28 L36 30" class="data-wave3" stroke-linecap="round" stroke-linejoin="round" opacity=".3"/></svg></div>
+            <h3><span class="gold-script">Data & Catalog Pipelines</span></h3>
+          </div>
+          <p>Ingesting, enriching, and organizing metadata from multiple external content and sports sources.</p>
+        </div>
+        <div class="glass exp-card anim">
+          <div class="exp-card-head">
+            <div class="exp-icon-wrap"><svg class="exp-anim-icon" viewBox="0 0 40 40" width="32" height="32" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M10 28 C4 28 2 24 4 20 C4 16 8 14 12 14 C12 8 20 6 26 10 C30 8 36 10 36 16 C40 18 38 24 34 24 L34 28" stroke-linecap="round"/><line x1="16" y1="28" x2="16" y2="34" class="cloud-drop1" stroke-linecap="round"/><line x1="22" y1="26" x2="22" y2="32" class="cloud-drop2" stroke-linecap="round"/><line x1="28" y1="28" x2="28" y2="34" class="cloud-drop3" stroke-linecap="round"/></svg></div>
+            <h3><span class="gold-script">Cloud & Platform Engineering</span></h3>
+          </div>
+          <p>Deploying and managing cloud infrastructure across AWS, GCP, and Azure for scalable, reliable production systems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PORTFOLIO ====== -->
+  <section id="portfolio" class="sect sect-earth">
+    <div class="sect-bg-planet earth-bg"></div>
+    <div class="container">
+      <div class="sh"><span class="sh-tag">Portfolio</span><h2><span class="gold-script">What I've Built</span></h2><span class="sh-line"></span></div>
+      <div class="port-tabs anim">
+        <button class="port-tab active" data-filter="all">All</button>
+        <button class="port-tab" data-filter="lumio"><img src="assets/logos/lumio-logo-dark.png" alt="Lumio" class="tab-logo" /></button>
+        <button class="port-tab" data-filter="zee"><img src="assets/logos/zee-logo.png" alt="Zee" class="tab-logo tab-logo-zee" /></button>
+      </div>
+      <div class="port-grid">
+        <div class="glass port-card anim" data-company="lumio"><div class="port-head"><div class="port-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><h3>TLDR Platform</h3></div><p>Built backend systems for Lumio's content aggregation platform across sports, music, movies, and shows — including search, recommendations, favorites, and watchlists.</p><div class="port-tags"><span>Node.js</span><span>Typesense</span><span>AWS</span></div></div>
+        <div class="glass port-card anim" data-company="lumio"><div class="port-head"><div class="port-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><h3>Search Platform</h3></div><p>Worked on Lumio's search experience built on top of Typesense, focused on fast and relevant discovery across multiple content categories.</p><div class="port-tags"><span>Typesense</span><span>Search</span><span>API</span></div></div>
+        <div class="glass port-card anim" data-company="lumio"><div class="port-head"><div class="port-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Catalog Enrichment</h3></div><p>Designed schedulers and data pipelines to ingest and enrich metadata from IMDb, TMDB, Entity Sports, API Tennis, Hotstar, and YouTube-based music sources.</p><div class="port-tags"><span>Pipelines</span><span>IMDb</span><span>TMDB</span></div></div>
+        <div class="glass port-card anim" data-company="lumio"><div class="port-head"><div class="port-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><h3>Internal Tools</h3></div><p>Deployed and managed internal platforms such as Frappe, Formbricks, OpenProject, and Typesense across cloud environments.</p><div class="port-tags"><span>Frappe</span><span>Formbricks</span><span>OpenProject</span></div></div>
+        <div class="glass port-card anim" data-company="lumio"><div class="port-head"><div class="port-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg></div><h3>Commerce & CRM</h3></div><p>Built backend workflows for Amazon and Flipkart sales data sync, user data handling, and Gladminds CRM integration for TV installation ticketing.</p><div class="port-tags"><span>Amazon</span><span>Flipkart</span><span>CRM</span></div></div>
+        <div class="glass port-card anim" data-company="lumio"><div class="port-head"><div class="port-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg></div><h3>Cloud Infrastructure</h3></div><p>Worked across AWS, GCP, and Azure, with strong ownership in AWS using ECS, EC2, EMR, Step Functions, Batch, RDS, DynamoDB, and Redis.</p><div class="port-tags"><span>AWS</span><span>GCP</span><span>Azure</span></div></div>
+        <div class="glass port-card anim" data-company="zee"><div class="port-head"><div class="port-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><h3>In-House Search Engine</h3></div><p>Built a 500 TPS content search system with Solr from scratch, replacing an external vendor and cutting costs by 70%.</p><div class="port-tags"><span>Node.js</span><span>Solr</span><span>500 TPS</span></div></div>
+        <div class="glass port-card anim" data-company="zee"><div class="port-head"><div class="port-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Search Migration</h3></div><p>Migrated search from Algolia to Sensara to in-house Solr with seamless transitions and zero disruption.</p><div class="port-tags"><span>Algolia</span><span>Sensara</span><span>Solr</span></div></div>
+        <div class="glass port-card anim" data-company="zee"><div class="port-head"><div class="port-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8v8M12 11v5M8 14v2M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg></div><h3>Recommendation Rails</h3></div><p>Collaborated with data science to build recommendation systems, directly improving click-through rates.</p><div class="port-tags"><span>Recommendations</span><span>CTR</span></div></div>
+        <div class="glass port-card anim" data-company="zee"><div class="port-head"><div class="port-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg></div><h3>AWS to GCP Migration</h3></div><p>Led complete migration of all search services from AWS to GCP with zero downtime.</p><div class="port-tags"><span>AWS</span><span>GCP</span></div></div>
+        <div class="glass port-card anim" data-company="zee"><div class="port-head"><div class="port-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 10l-4 4l6 6l4-16l-18 7l7 2"/></svg></div><h3>Episode Search</h3></div><p>Built episode-level search improving content discoverability across the platform.</p><div class="port-tags"><span>Search</span><span>Discovery</span></div></div>
+        <div class="glass port-card anim" data-company="zee"><div class="port-head"><div class="port-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="19" cy="17" r="2"/></svg></div><h3>Metadata Pipeline</h3></div><p>Built metadata sharing pipeline aligned with business rules and security.</p><div class="port-tags"><span>Metadata</span><span>Pipeline</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== TECH STACK ====== -->
+  <section id="stack" class="sect">
+    <div class="sect-bg-planet stack-bg"></div>
+    <div class="container">
+      <div class="sh"><span class="sh-tag">Tech Stack</span><h2><span class="gold-script">Tools I Work With</span></h2><span class="sh-line"></span></div>
+    </div>
+    <div class="marquee-wrap anim">
+      <div class="marquee">
+        <div class="marquee-track">
+          <span class="m-label">Languages</span>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" title="Python"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg" alt="Golang" title="Golang"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" title="Node.js"/>
+          <span class="m-sep"></span>
+          <span class="m-label">Cloud</span>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" title="AWS"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="GCP" title="GCP"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure" title="Azure"/>
+          <span class="m-sep"></span>
+          <span class="m-label">Search</span>
+          <img class="m-logo" src="assets/logos/logo-typesense.png" alt="Typesense" title="Typesense"/>
+          <img class="m-logo" src="assets/logos/logo-solr.png" alt="Solr" title="Solr"/>
+          <span class="m-sep"></span>
+          <span class="m-label">Databases</span>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" title="MySQL"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" title="MongoDB"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis" title="Redis"/>
+          <img class="m-logo" src="assets/logos/logo-dynamodb.png" alt="DynamoDB" title="DynamoDB"/>
+          <span class="m-sep"></span>
+          <span class="m-label">DevOps</span>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" title="Docker"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" title="Terraform"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" title="Git"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-original.svg" alt="GitHub Workflows" title="GitHub Workflows"/>
+          <img class="m-logo" src="assets/logos/logo-n8n.png" alt="n8n" title="n8n"/>
+          <span class="m-sep"></span>
+          <span class="m-label">Platforms</span>
+          <img class="m-logo" src="assets/logos/logo-frappe.png" alt="Frappe" title="Frappe"/>
+          <img class="m-logo" src="assets/logos/logo-formbricks.png" alt="Formbricks" title="Formbricks"/>
+          <img class="m-logo" src="assets/logos/logo-openproject.png" alt="OpenProject" title="OpenProject"/>
+          <span class="m-sep"></span>
+          <!-- Duplicate for seamless loop -->
+          <span class="m-label">Languages</span>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" title="Python"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg" alt="Golang" title="Golang"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" title="Node.js"/>
+          <span class="m-sep"></span>
+          <span class="m-label">Cloud</span>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" title="AWS"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="GCP" title="GCP"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure" title="Azure"/>
+          <span class="m-sep"></span>
+          <span class="m-label">Search</span>
+          <img class="m-logo" src="assets/logos/logo-typesense.png" alt="Typesense" title="Typesense"/>
+          <img class="m-logo" src="assets/logos/logo-solr.png" alt="Solr" title="Solr"/>
+          <span class="m-sep"></span>
+          <span class="m-label">Databases</span>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" title="MySQL"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" title="MongoDB"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis" title="Redis"/>
+          <img class="m-logo" src="assets/logos/logo-dynamodb.png" alt="DynamoDB" title="DynamoDB"/>
+          <span class="m-sep"></span>
+          <span class="m-label">DevOps</span>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" title="Docker"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" title="Terraform"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" title="Git"/>
+          <img class="m-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-original.svg" alt="GitHub Workflows" title="GitHub Workflows"/>
+          <img class="m-logo" src="assets/logos/logo-n8n.png" alt="n8n" title="n8n"/>
+          <span class="m-sep"></span>
+          <span class="m-label">Platforms</span>
+          <img class="m-logo" src="assets/logos/logo-frappe.png" alt="Frappe" title="Frappe"/>
+          <img class="m-logo" src="assets/logos/logo-formbricks.png" alt="Formbricks" title="Formbricks"/>
+          <img class="m-logo" src="assets/logos/logo-openproject.png" alt="OpenProject" title="OpenProject"/>
+          <span class="m-sep"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== IMPACT ====== -->
+  <section id="impact" class="sect sect-jupiter">
+    <div class="sect-bg-planet jupiter-bg"></div>
+    <div class="container">
+      <div class="sh"><span class="sh-tag">Impact</span><h2><span class="gold-script">Numbers That Matter</span></h2><span class="sh-line"></span></div>
+      <div class="impact-row">
+        <div class="glass impact-card impact-zee anim"><span class="stat-n" data-target="500">0</span><span class="stat-u">TPS</span><p>Search throughput — content search system handling 500 transactions per second at Zee5.</p></div>
+        <div class="glass impact-card impact-zee anim"><span class="stat-n" data-target="70">0</span><span class="stat-u">%</span><p>Cost reduction — brought search in-house with Solr, slashing vendor costs while improving quality.</p></div>
+        <div class="glass impact-card impact-lumio anim"><span class="stat-n" data-target="6">0</span><span class="stat-u">+</span><p>Data sources integrated — IMDb, TMDB, Entity Sports, API Tennis, Hotstar, and YouTube music pipelines.</p></div>
+        <div class="glass impact-card impact-lumio anim"><span class="stat-n" data-target="3">0</span><span class="stat-u">Clouds</span><p>Cloud platforms — deploying and managing infrastructure across AWS, GCP, and Azure.</p></div>
+        <div class="glass impact-card impact-lumio anim"><span class="stat-n" data-target="5">0</span><span class="stat-u">+ Verticals</span><p>Product verticals — Sports, Music, Movies, Shows, and Commerce experiences powered by TLDR.</p></div>
+        <div class="glass impact-card impact-neutral anim"><span class="stat-n" data-target="4">0</span><span class="stat-u">+ yrs</span><p>Years building backend systems, search engines, and cloud infrastructure at scale.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== EXPERIENCE ====== -->
+  <section id="experience" class="sect sect-saturn">
+    <div class="sect-bg-planet saturn-bg"><div class="saturn-ring-deco"></div></div>
+    <div class="container">
+      <div class="sh"><span class="sh-tag">Experience</span><h2><span class="gold-script">Career Journey</span></h2><span class="sh-line"></span></div>
+      <div class="timeline">
+        <div class="tl-company tl-co-lumio anim">
+          <div class="tl-co-head"><img src="assets/logos/lumio-logo-dark.png" alt="Lumio" class="tl-co-logo tl-co-logo-lumio" /><span class="tl-co-period">2024 — Present</span></div>
+          <div class="tl-co-body"><div class="tl-co-track"></div>
+            <div class="tl-item"><div class="tl-dot tl-dot-lumio"></div><div class="glass tl-card tl-card-lumio"><span class="tl-date">2024 — Present</span><h3>Software Engineer</h3><p class="tl-sub">Building content platforms, search systems, and cloud-native backend infrastructure</p><ul><li>Built backend systems for TLDR, Lumio's content aggregation platform across sports, music, movies, and shows</li><li>Worked on search, recommendations, favorites, and watchlists to improve discovery and engagement</li><li>Built ingestion and enrichment pipelines using IMDb, TMDB, Entity Sports, API Tennis, Hotstar APIs, and YouTube</li><li>Deployed internal tools including Frappe, Formbricks, OpenProject, and Typesense</li><li>Worked across <strong>AWS, GCP, and Azure</strong>, with strong ownership of backend infrastructure, integrations, and operational systems</li></ul></div></div>
+          </div>
+        </div>
+        <div class="tl-company tl-co-zee anim">
+          <div class="tl-co-head"><img src="assets/logos/zee-logo.png" alt="Zee" class="tl-co-logo tl-co-logo-zee" /><span class="tl-co-period">Apr 2022 — 2024</span></div>
+          <div class="tl-co-body"><div class="tl-co-track"></div>
+            <div class="tl-item"><div class="tl-dot tl-dot-zee"></div><div class="glass tl-card tl-card-zee"><span class="tl-date">Apr 2023 — 2024</span><h3>Software Development Engineer</h3><ul><li>Built Node.js service handling <strong>500 TPS</strong> for content search</li><li>Engineered hybrid search with Solr — suggestions, broad queries, ranking</li><li>Moved search in-house — <strong>70% cost reduction</strong>, better result quality</li></ul></div></div>
+            <div class="tl-item"><div class="tl-dot tl-dot-zee"></div><div class="glass tl-card tl-card-zee"><span class="tl-date">Apr 2022 — Apr 2023</span><h3>Associate SDE</h3><ul><li>Migrated search from Algolia to Sensara with seamless integration</li><li>Built Episode search and metadata pipeline for content discoverability</li><li>Managed full search service migration from <strong>AWS to GCP</strong></li><li>Helped data science team build recommendation rails, improving CTR</li></ul></div></div>
+          </div>
+        </div>
+        <div class="tl-company tl-co-intern anim">
+          <div class="tl-co-head"><img src="assets/logos/technologics-logo.png" alt="Technologics" class="tl-co-logo tl-co-logo-tech" /><span class="tl-co-period">Aug — Sep 2021</span></div>
+          <div class="tl-co-body"><div class="tl-co-track"></div>
+            <div class="tl-item"><div class="tl-dot tl-dot-intern"></div><div class="glass tl-card tl-card-intern"><span class="tl-date">Aug — Sep 2021</span><h3>Intern</h3><ul><li>Built diabetes prediction model using supervised ML</li><li>Applied classification for early disease detection</li></ul></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== HOBBIES ====== -->
+  <section id="hobbies" class="sect">
+    <div class="sect-bg-planet hobbies-bg"></div>
+    <div class="container">
+      <div class="sh"><span class="sh-tag">Beyond Code</span><h2><span class="gold-script">When I'm Not Building</span></h2><span class="sh-line"></span></div>
+      <div class="hobbies-grid">
+        <div class="glass hobby-card anim">
+          <div class="hobby-icon">
+            <img src="assets/shuttlecock.png" alt="Badminton" width="28" height="28" class="hobby-img" />
+          </div>
+          <h3>Badminton</h3>
+          <p>My go-to sport for clearing the mind and staying sharp. Nothing beats a good rally after a long debugging session.</p>
+        </div>
+        <div class="glass hobby-card anim">
+          <div class="hobby-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <h3>Exploring Countries</h3>
+          <p>Travelled to Japan, Malaysia, and Singapore so far — and planning to visit many more. Every trip resets the perspective.</p>
+        </div>
+        <div class="glass hobby-card anim">
+          <div class="hobby-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M2 8h20"/><circle cx="12" cy="13" r="2"/><path d="M9 18v2M15 18v2M7 22h10"/></svg>
+          </div>
+          <h3>Anime</h3>
+          <p>From Naruto to Attack on Titan — anime is where I find storytelling, world-building, and the occasional life philosophy.</p>
+        </div>
+        <div class="glass hobby-card anim">
+          <div class="hobby-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v2M8 8l1.5 1.5M16 8l-1.5 1.5"/><path d="M7 14c0-1 1-3 5-3s5 2 5 3" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Cricket, Movies & Shows</h3>
+          <p>Whether it's watching a nail-biting cricket match or binging a great series — always up for good entertainment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CONTACT ====== -->
+  <section id="contact" class="sect sect-neptune">
+    <div class="sect-bg-planet neptune-bg"></div>
+    <div class="container">
+      <div class="sh"><span class="sh-tag">Contact</span><h2><span class="gold-script">Let's Connect</span></h2><span class="sh-line"></span></div>
+      <div class="contact-center">
+        <p class="contact-lead anim">Got a project, opportunity, or just want to talk backend engineering?</p>
+        <div class="contact-cards">
+          <a href="mailto:krishnathul476@gmail.com" class="glass c-card anim"><div class="c-icon c-email"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg></div><div class="c-text"><strong>Email</strong><span>krishnathul476@gmail.com</span></div><svg class="c-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="tel:+917382718670" class="glass c-card anim"><div class="c-icon c-phone"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><div class="c-text"><strong>Phone</strong><span>+91 7382718670</span></div><svg class="c-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="https://www.linkedin.com/in/athul-krishna-k-s-7953b71ba/" target="_blank" rel="noopener" class="glass c-card anim"><div class="c-icon c-li"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div><div class="c-text"><strong>LinkedIn</strong><span>Athul Krishna K S</span></div><svg class="c-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="https://instagram.com/athulkrishna____" target="_blank" rel="noopener" class="glass c-card anim"><div class="c-icon c-ig"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div><div class="c-text"><strong>Instagram</strong><span>@athulkrishna____</span></div><svg class="c-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+        <p class="contact-loc anim"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Bengaluru, India</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container foot-row">
+      <p>&copy; 2026 Athul Krishna K S</p>
+      <p class="foot-tag">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#d4a017"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span>Crafted among the stars</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#d4a017"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
