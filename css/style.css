@@ -108,6 +108,22 @@ button:focus-visible, a:focus-visible { outline-offset: 2px; }
 .nav-links a:hover, .nav-links a.active { color: var(--accent); }
 .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 
+/* Nav planet icons */
+.nav-planet {
+  display: inline-block; width: 16px; height: 16px; border-radius: 50%;
+  margin-right: 5px; vertical-align: middle; position: relative; top: -1px;
+  background-size: cover; background-position: center;
+}
+.np-sun     { background-image: url('../assets/nav-planets/sun.png'); }
+.np-mercury { background-image: url('../assets/nav-planets/mercury.png'); }
+.np-venus   { background-image: url('../assets/nav-planets/venus.png'); }
+.np-earth   { background-image: url('../assets/nav-planets/earth.png'); }
+.np-mars    { background-image: url('../assets/nav-planets/mars.png'); }
+.np-jupiter { background-image: url('../assets/nav-planets/jupiter.png'); }
+.np-saturn  { background-image: url('../assets/nav-planets/saturn.png'); border-radius: 0; width: 22px; }
+.np-uranus  { background-image: url('../assets/nav-planets/uranus.png'); }
+.np-neptune { background-image: url('../assets/nav-planets/neptune.png'); }
+
 .nav-actions { display: flex; align-items: center; gap: .5rem; }
 
 .theme-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--gb); background: var(--glass); backdrop-filter: blur(8px); cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--accent); transition: all var(--tr); }
