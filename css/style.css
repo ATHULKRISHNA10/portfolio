@@ -23,7 +23,7 @@
    2. THEMES
    -------------------------------- */
 [data-theme="dark"] {
-  --bg: #030810; --text: #e6ecf6; --t2: #90a4c0; --t3: #546580;
+  --bg: #030810; --text: #f0f4fa; --t2: #b0c4de; --t3: #7a94b0;
   --accent: #22c55e; --accent2: #4ade80; --adim: rgba(34,197,94,.1);
   --glow: rgba(34,197,94,.15); --glows: rgba(34,197,94,.35);
   --glass: rgba(12,20,36,.55); --gb: rgba(255,255,255,.05); --gbh: rgba(34,197,94,.18);
