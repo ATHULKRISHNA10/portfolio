@@ -94,7 +94,7 @@
     .dash-btn select option{background:var(--bg);color:var(--text)}
 
     /* Summary */
-    .summary-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+    .summary-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:2rem}
     .s-card{
       background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
       border:1px solid var(--gb);border-radius:var(--r);padding:1.25rem;text-align:center;
@@ -194,23 +194,24 @@
       border-radius:var(--r);overflow-x:auto;
     }
     table{width:100%;border-collapse:collapse;font-size:.75rem}
-    th{font-family:var(--mono);font-size:.5rem;letter-spacing:1px;text-transform:uppercase;padding:.85rem .75rem;text-align:right;border-bottom:2px solid var(--gb);white-space:nowrap}
+    th{font-family:var(--mono);font-size:.48rem;letter-spacing:1px;text-transform:uppercase;padding:.75rem .6rem;text-align:center;border-bottom:2px solid var(--gb);white-space:nowrap}
     th:first-child,th:nth-child(2){text-align:left}
-    td{padding:.75rem .75rem;border-bottom:1px solid var(--gb);white-space:nowrap;color:var(--t2);text-align:right;transition:background .2s;font-size:.8rem}
+    th:last-child{text-align:center}
+    td{padding:.7rem .6rem;border-bottom:1px solid var(--gb);white-space:nowrap;color:var(--t2);text-align:center;transition:background .2s;font-size:.78rem}
     td:first-child{text-align:left;color:var(--text);font-weight:600;font-family:var(--head);font-size:.75rem}
-    td:nth-child(2){text-align:left;color:var(--t3);font-size:.75rem}
+    td:nth-child(2){text-align:left;color:var(--t3);font-size:.72rem}
     tr:last-child td{border-bottom:none}
-    tr:hover td{background:rgba(255,255,255,.03)}
-    td:last-child{font-weight:800;color:var(--accent);font-family:var(--head);font-size:.85rem}
-    td.cell-paid{background:var(--paid-bg);color:var(--green);font-weight:600;position:relative}
-    td.cell-paid::before{content:'✓';position:absolute;left:4px;top:50%;transform:translateY(-50%);font-size:.5rem;opacity:.5}
-    td.cell-unpaid{color:var(--text)}
-    td.cell-zero{color:var(--t3);opacity:.4}
-    .current-row td{background:rgba(34,197,94,.04);font-weight:600;color:var(--text)}
+    tr:hover td{background:rgba(255,255,255,.02)}
+    td:last-child{font-weight:800;color:var(--accent);font-family:var(--head);font-size:.82rem;text-align:center}
+    td.cell-paid{background:rgba(34,197,94,.06);color:var(--t2);font-weight:500}
+    td.cell-unpaid{color:var(--text);font-weight:500}
+    td.cell-zero{color:var(--t3);opacity:.3;font-size:.7rem}
+    .current-row td{background:rgba(34,197,94,.04)}
     .current-row td:first-child{position:relative;padding-left:1.2rem}
     .current-row td:first-child::before{content:'';position:absolute;left:0;top:25%;bottom:25%;width:3px;background:var(--accent);border-radius:2px}
-    .current-row td.cell-paid{background:rgba(34,197,94,.1)}
+    .current-row td.cell-paid{background:rgba(34,197,94,.08)}
     .current-row td:last-child{color:var(--accent)}
+    .paid-badge{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-left:4px;vertical-align:middle}
 
     /* Bank colors */
     .bank-indusind{--bank:#e91e63}
@@ -439,8 +440,12 @@
 
       const paidCount = CARDS.filter((c, i) => md.amounts[i] > 0 && isPaid(md, i)).length;
 
+      let pendingAmt = 0;
+      CARDS.forEach((c, i) => { if (md.amounts[i] > 0 && !isPaid(md, i)) pendingAmt += md.amounts[i]; });
+
       document.getElementById('summaryRow').innerHTML = `
         <div class="s-card"><div class="s-val">₹${fmt(total)}</div><div class="s-label">Total Due</div></div>
+        <div class="s-card"><div class="s-val" style="color:${pendingAmt>0?'var(--red)':'var(--green)'}">₹${fmt(pendingAmt)}</div><div class="s-label">Pending</div></div>
         <div class="s-card"><div class="s-val">${active}</div><div class="s-label">Active Cards</div></div>
         <div class="s-card"><div class="s-val" style="color:${dueSoon>0?'var(--yellow)':'var(--green)'}">${dueSoon}</div><div class="s-label">Due Soon</div></div>
         <div class="s-card"><div class="s-val" style="color:${paidCount===active?'var(--green)':'var(--text)'}">${paidCount}/${active}</div><div class="s-label">Paid</div></div>
@@ -612,7 +617,7 @@
           m.amounts.map((a, i) => {
             const paid = isPaid(m, i);
             if (a <= 0) return '<td class="cell-zero">—</td>';
-            return `<td class="${paid ? 'cell-paid' : 'cell-unpaid'}">₹${fmt(a)}</td>`;
+            return `<td class="${paid ? 'cell-paid' : 'cell-unpaid'}">₹${fmt(a)}${paid ? '<span class="paid-badge"></span>' : ''}</td>`;
           }).join('') +
           `<td>₹${fmt(m.total)}</td></tr>`;
       }).join('');
