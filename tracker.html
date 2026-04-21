@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Card Tracker — Athul Krishna K S</title>
+  <link rel="icon" href="assets/clover.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--head:'Archivo',sans-serif;--body:'Space Grotesk',sans-serif;--mono:'Space Mono',monospace;--r:16px;--ease:cubic-bezier(.4,0,.2,1);--tr:.25s var(--ease)}
+
+    [data-theme="dark"]{
+      --bg:#030810;--bg2:#0a1220;--text:#f0f4fa;--t2:#b0c4de;--t3:#7a94b0;
+      --accent:#22c55e;--accent2:#4ade80;--adim:rgba(34,197,94,.1);
+      --glass:rgba(12,20,36,.6);--gb:rgba(255,255,255,.06);--gbh:rgba(34,197,94,.2);
+      --gsh:0 6px 24px rgba(0,0,0,.4);
+      --red:#ef4444;--yellow:#eab308;--green:#22c55e;--blue:#3b82f6;
+      --paid-bg:rgba(34,197,94,.08);--unpaid-bg:transparent;
+    }
+    [data-theme="light"]{
+      --bg:#f3f7fb;--bg2:#e8eef5;--text:#0b1a2e;--t2:#2a4868;--t3:#6888a4;
+      --accent:#16a34a;--accent2:#15803d;--adim:rgba(22,163,74,.06);
+      --glass:rgba(255,255,255,.65);--gb:rgba(0,0,0,.06);--gbh:rgba(22,101,52,.16);
+      --gsh:0 6px 24px rgba(0,20,50,.05);
+      --red:#dc2626;--yellow:#ca8a04;--green:#16a34a;--blue:#2563eb;
+      --paid-bg:rgba(22,163,74,.08);--unpaid-bg:transparent;
+    }
+
+    body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;transition:background var(--tr),color var(--tr)}
+
+    /* ================================
+       LOGIN — Modern glassmorphism
+       ================================ */
+    .login-gate{
+      min-height:100vh;display:flex;align-items:center;justify-content:center;
+      background:var(--bg);
+      background-image:radial-gradient(ellipse 60% 50% at 30% 40%,rgba(34,197,94,.04),transparent),
+                        radial-gradient(ellipse 50% 60% at 70% 60%,rgba(59,130,246,.03),transparent);
+    }
+    .login-box{
+      background:var(--glass);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+      border:1px solid var(--gb);border-radius:24px;padding:3rem 2.5rem;
+      width:380px;text-align:center;box-shadow:var(--gsh);position:relative;overflow:hidden;
+    }
+    .login-box::before{
+      content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+      background:conic-gradient(from 0deg,transparent,rgba(34,197,94,.05),transparent,rgba(59,130,246,.03),transparent);
+      animation:login-rotate 8s linear infinite;
+    }
+    @keyframes login-rotate{to{transform:rotate(360deg)}}
+    .login-content{position:relative;z-index:1}
+    .login-avatar{width:64px;height:64px;border-radius:50%;background:var(--adim);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;border:2px solid var(--gb)}
+    .login-avatar svg{width:28px;height:28px;color:var(--accent)}
+    .login-box h2{font-family:var(--head);font-size:1.3rem;margin-bottom:.3rem}
+    .login-box h2 span{color:var(--accent)}
+    .login-box .login-sub{font-size:.8rem;color:var(--t3);margin-bottom:2rem}
+    .input-wrap{position:relative;margin-bottom:1rem}
+    .input-wrap input{
+      width:100%;padding:.85rem 1rem .85rem 2.8rem;border-radius:14px;border:1px solid var(--gb);
+      background:rgba(255,255,255,.04);color:var(--text);font-family:var(--body);
+      font-size:.88rem;outline:none;transition:border-color .3s;
+    }
+    .input-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(34,197,94,.1)}
+    .input-wrap input::placeholder{color:var(--t3)}
+    .input-wrap svg{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--t3)}
+    .login-btn{
+      width:100%;padding:.85rem;border-radius:14px;border:none;
+      background:var(--accent);color:#020a06;font-weight:700;font-size:.9rem;font-family:var(--body);
+      cursor:pointer;transition:all .2s;
+    }
+    .login-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(34,197,94,.3)}
+    .login-error{color:var(--red);font-size:.78rem;margin-top:.75rem;display:none}
+
+    /* ================================
+       DASHBOARD
+       ================================ */
+    .dashboard{display:none;max-width:1200px;margin:0 auto;padding:1.5rem}
+
+    /* Header */
+    .dash-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+    .dash-header h1{font-family:var(--head);font-size:1.4rem;font-weight:800}
+    .dash-header h1 span{color:var(--accent)}
+    .dash-actions{display:flex;gap:.5rem;align-items:center}
+    .dash-btn{
+      padding:.5rem 1rem;border-radius:12px;border:1px solid var(--gb);
+      background:var(--glass);backdrop-filter:blur(8px);color:var(--text);font-size:.75rem;
+      cursor:pointer;transition:all .2s;font-family:var(--body);text-decoration:none;
+    }
+    .dash-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .dash-btn select{background:transparent;border:none;color:inherit;font:inherit;cursor:pointer;outline:none}
+    .dash-btn select option{background:var(--bg);color:var(--text)}
+
+    /* Summary */
+    .summary-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+    .s-card{
+      background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+      border:1px solid var(--gb);border-radius:var(--r);padding:1.25rem;text-align:center;
+      transition:all .2s;
+    }
+    .s-card:hover{border-color:var(--gbh);transform:translateY(-2px)}
+    .s-val{font-family:var(--head);font-size:1.7rem;font-weight:800;color:var(--accent)}
+    .s-label{font-size:.6rem;color:var(--t3);margin-top:.25rem;font-family:var(--mono);letter-spacing:1.5px;text-transform:uppercase}
+
+    /* Card grid */
+    .cards-section-title{font-family:var(--head);font-size:1rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+    .cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.5rem}
+
+    /* Individual card */
+    .cc{
+      background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+      border:1px solid var(--gb);border-radius:var(--r);padding:0;
+      transition:all .25s;position:relative;overflow:hidden;cursor:pointer;
+    }
+    .cc:hover{transform:translateY(-3px);box-shadow:var(--gsh),0 0 20px var(--adim)}
+    .cc.paid{opacity:.6}
+    .cc.paid::after{
+      content:'PAID';position:absolute;top:12px;right:-28px;
+      background:var(--green);color:#000;font-size:.55rem;font-family:var(--mono);font-weight:700;
+      letter-spacing:2px;padding:.15rem 2rem;transform:rotate(45deg);
+    }
+
+    /* Card colored top bar */
+    .cc-bar{height:4px;width:100%}
+    .cc-body{padding:1.25rem}
+    .cc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem}
+    .cc-name{font-family:var(--head);font-size:.82rem;font-weight:700}
+    .cc-bank{font-size:.62rem;color:var(--t3);margin-top:2px}
+    .cc-badge{
+      font-size:.5rem;font-family:var(--mono);font-weight:700;letter-spacing:1px;
+      padding:.2rem .55rem;border-radius:50px;text-transform:uppercase;
+    }
+    .b-safe{background:rgba(34,197,94,.12);color:var(--green)}
+    .b-warn{background:rgba(234,179,8,.12);color:var(--yellow)}
+    .b-danger{background:rgba(239,68,68,.12);color:var(--red)}
+    .b-paid{background:rgba(34,197,94,.15);color:var(--green)}
+    .b-none{background:rgba(120,120,140,.1);color:var(--t3)}
+
+    .cc-num{font-family:var(--mono);font-size:.65rem;color:var(--t3);margin-bottom:.75rem;letter-spacing:2px}
+    .cc-amount{font-family:var(--head);font-size:1.5rem;font-weight:800;margin-bottom:.6rem}
+    .cc-dates{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem}
+    .cc-dl{font-size:.5rem;color:var(--t3);font-family:var(--mono);letter-spacing:1px;text-transform:uppercase}
+    .cc-dv{font-size:.82rem;font-weight:600;margin-top:1px}
+    .cc-days{font-size:.72rem;font-weight:600;margin-top:.4rem}
+    .cc-progress{height:3px;background:rgba(255,255,255,.05);border-radius:2px;margin-top:.5rem;overflow:hidden}
+    .cc-pbar{height:100%;border-radius:2px;transition:width .5s}
+
+    /* Card detail modal */
+    .modal-overlay{
+      display:none;position:fixed;inset:0;z-index:9999;
+      background:rgba(0,0,0,.6);backdrop-filter:blur(8px);
+      align-items:center;justify-content:center;
+    }
+    .modal-overlay.open{display:flex}
+    .modal-box{
+      background:var(--bg2);border:1px solid var(--gb);border-radius:20px;
+      width:420px;max-width:90vw;padding:2rem;position:relative;
+      box-shadow:0 20px 60px rgba(0,0,0,.5);
+    }
+    .modal-close{
+      position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:50%;
+      border:1px solid var(--gb);background:var(--glass);color:var(--t3);
+      cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;
+      transition:all .2s;
+    }
+    .modal-close:hover{border-color:var(--red);color:var(--red)}
+    .modal-bar{height:4px;border-radius:20px 20px 0 0;position:absolute;top:0;left:0;right:0}
+    .modal-name{font-family:var(--head);font-size:1.2rem;font-weight:800;margin-bottom:.25rem;margin-top:.5rem}
+    .modal-bank{font-size:.8rem;color:var(--t3);margin-bottom:1.5rem}
+    .modal-row{display:flex;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid var(--gb);font-size:.85rem}
+    .modal-row:last-child{border-bottom:none}
+    .modal-label{color:var(--t3)}
+    .modal-val{font-weight:600}
+    .modal-nums{margin-top:1rem}
+    .modal-nums h4{font-size:.6rem;font-family:var(--mono);color:var(--t3);letter-spacing:2px;text-transform:uppercase;margin-bottom:.5rem}
+    .modal-card-num{font-family:var(--mono);font-size:.85rem;letter-spacing:3px;padding:.4rem 0;color:var(--t2)}
+
+    /* Mark paid button */
+    .mark-paid-btn{
+      width:100%;margin-top:1.5rem;padding:.7rem;border-radius:12px;border:none;
+      font-family:var(--body);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .2s;
+    }
+    .mark-paid-btn.unpaid{background:var(--accent);color:#020a06}
+    .mark-paid-btn.unpaid:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(34,197,94,.3)}
+    .mark-paid-btn.is-paid{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.2)}
+    .mark-paid-btn.is-paid:hover{background:rgba(239,68,68,.15)}
+
+    /* Monthly table */
+    .table-section{margin-bottom:2rem}
+    .table-wrap{
+      background:var(--glass);backdrop-filter:blur(16px);border:1px solid var(--gb);
+      border-radius:var(--r);overflow-x:auto;
+    }
+    table{width:100%;border-collapse:collapse;font-size:.75rem}
+    th{font-family:var(--mono);font-size:.5rem;letter-spacing:1px;text-transform:uppercase;padding:.85rem .75rem;text-align:right;border-bottom:2px solid var(--gb);white-space:nowrap}
+    th:first-child,th:nth-child(2){text-align:left}
+    td{padding:.75rem .75rem;border-bottom:1px solid var(--gb);white-space:nowrap;color:var(--t2);text-align:right;transition:background .2s;font-size:.8rem}
+    td:first-child{text-align:left;color:var(--text);font-weight:600;font-family:var(--head);font-size:.75rem}
+    td:nth-child(2){text-align:left;color:var(--t3);font-size:.75rem}
+    tr:last-child td{border-bottom:none}
+    tr:hover td{background:rgba(255,255,255,.03)}
+    td:last-child{font-weight:800;color:var(--accent);font-family:var(--head);font-size:.85rem}
+    td.cell-paid{background:var(--paid-bg);color:var(--green);font-weight:600;position:relative}
+    td.cell-paid::before{content:'✓';position:absolute;left:4px;top:50%;transform:translateY(-50%);font-size:.5rem;opacity:.5}
+    td.cell-unpaid{color:var(--text)}
+    td.cell-zero{color:var(--t3);opacity:.4}
+    .current-row td{background:rgba(34,197,94,.04);font-weight:600;color:var(--text)}
+    .current-row td:first-child{position:relative;padding-left:1.2rem}
+    .current-row td:first-child::before{content:'';position:absolute;left:0;top:25%;bottom:25%;width:3px;background:var(--accent);border-radius:2px}
+    .current-row td.cell-paid{background:rgba(34,197,94,.1)}
+    .current-row td:last-child{color:var(--accent)}
+
+    /* Bank colors */
+    .bank-indusind{--bank:#e91e63}
+    .bank-icici{--bank:#f57c00}
+    .bank-hdfc{--bank:#1565c0}
+    .bank-axis{--bank:#800080}
+    .bank-hsbc{--bank:#db0011}
+    .bank-federal{--bank:#00838f}
+    .bank-rbl{--bank:#ff6f00}
+    .bank-amex{--bank:#006fcf}
+
+    /* Responsive */
+    @media(max-width:900px){.cards-grid{grid-template-columns:1fr 1fr}.summary-row{grid-template-columns:1fr 1fr}}
+    @media(max-width:480px){.cards-grid{grid-template-columns:1fr}.summary-row{grid-template-columns:1fr}.dashboard{padding:1rem}}
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div class="login-gate" id="loginGate">
+    <div class="login-box">
+      <div class="login-content">
+        <div class="login-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
+        </div>
+        <h2>Card <span>Tracker</span></h2>
+        <p class="login-sub">Enter your password to continue</p>
+        <div class="input-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+          <input type="password" id="passInput" placeholder="Password" autocomplete="off" />
+        </div>
+        <button class="login-btn" id="loginBtn">Unlock Dashboard</button>
+        <p class="login-error" id="loginError">Incorrect password. Try again.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD DETAIL MODAL -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-box">
+      <div class="modal-bar" id="modalBar"></div>
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dashboard" id="dashboard">
+    <div class="dash-header">
+      <h1><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" style="vertical-align:middle;margin-right:6px"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>Card <span>Tracker</span></h1>
+      <div class="dash-actions">
+        <div class="dash-btn"><select id="monthFilter"></select></div>
+        <button class="dash-btn" id="themeBtn">🌙</button>
+        <a href="index.html" class="dash-btn">← Portfolio</a>
+      </div>
+    </div>
+    <div class="summary-row" id="summaryRow"></div>
+    <p class="cards-section-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h.01"/></svg> Your Cards</p>
+    <div class="cards-grid" id="cardsGrid"></div>
+    <div class="table-section">
+      <p class="cards-section-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M16 8v8M12 11v5M8 14v2M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg> Monthly History</p>
+      <div class="table-wrap"><table><thead id="tHead"></thead><tbody id="tBody"></tbody></table></div>
+    </div>
+  </div>
+
+  <script>
+    const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTA2An1yAW7b84bZr3oda7PDRcQ2VuXC1-1G5y-R4pnbj8U6COG_9owjrmO8V99kr621l33S5n8Mi46/pub?gid=420102864&single=true&output=csv';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbyXWUeJgOaAnBz8trqyO8BglGzTN9hOGNdEQtjw7FQ1Pdbw2KhzQXjMPbQQEPjLvbPd5Q/exec';
+
+    // Bank config: name, color, short
+    const BANK_MAP = [
+      { bank: 'IndusInd', color: '#e91e63', cls: 'bank-indusind' },
+      { bank: 'ICICI', color: '#f57c00', cls: 'bank-icici' },
+      { bank: 'HDFC', color: '#1565c0', cls: 'bank-hdfc' },
+      { bank: 'Axis', color: '#800080', cls: 'bank-axis' },
+      { bank: 'ICICI', color: '#006fcf', cls: 'bank-amex' },
+      { bank: 'HSBC', color: '#db0011', cls: 'bank-hsbc' },
+      { bank: 'Federal', color: '#00838f', cls: 'bank-federal' },
+      { bank: 'Axis', color: '#800080', cls: 'bank-axis' },
+      { bank: 'RBL', color: '#ff6f00', cls: 'bank-rbl' },
+    ];
+
+    /* === AUTH === */
+    const loginGate = document.getElementById('loginGate');
+    const dash = document.getElementById('dashboard');
+    const passInput = document.getElementById('passInput');
+
+    if (sessionStorage.getItem('tracker_auth') === 'true') { loginGate.style.display = 'none'; dash.style.display = 'block'; loadData(); }
+
+    document.getElementById('loginBtn').addEventListener('click', tryLogin);
+    passInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+
+    function tryLogin() {
+      if (passInput.value === 'Athul@1018') {
+        sessionStorage.setItem('tracker_auth', 'true');
+        loginGate.style.display = 'none'; dash.style.display = 'block'; loadData();
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        passInput.value = ''; passInput.focus();
+      }
+    }
+
+    /* === THEME === */
+    const html = document.documentElement;
+    const themeBtn = document.getElementById('themeBtn');
+    html.dataset.theme = localStorage.getItem('tracker_theme') || 'dark';
+    themeBtn.textContent = html.dataset.theme === 'dark' ? '☀️' : '🌙';
+    themeBtn.addEventListener('click', () => {
+      const n = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = n; localStorage.setItem('tracker_theme', n);
+      themeBtn.textContent = n === 'dark' ? '☀️' : '🌙';
+    });
+
+    /* === DATA === */
+    const CARDS = [];
+    const MONTHS = [];
+    let paidState = JSON.parse(localStorage.getItem('tracker_paid') || '{}');
+
+    async function loadData() {
+      document.getElementById('cardsGrid').innerHTML = '<p style="color:var(--t3);grid-column:1/-1;text-align:center;font-size:.85rem">Loading...</p>';
+      try {
+        const [csvRes] = await Promise.all([
+          fetch(SHEET_URL),
+          loadPaidStatus()
+        ]);
+        const csv = await csvRes.text();
+        parseCSV(csv);
+        renderAll();
+      } catch (e) {
+        document.getElementById('cardsGrid').innerHTML = '<p style="color:var(--red);grid-column:1/-1;text-align:center">Failed to load: ' + e.message + '</p>';
+      }
+    }
+
+    function parseCSV(csv) {
+      // Handle multiline quoted fields properly
+      const rows = [];
+      let current = ''; let inQuotes = false;
+      for (let i = 0; i < csv.length; i++) {
+        const ch = csv[i];
+        if (ch === '"') { inQuotes = !inQuotes; }
+        else if (ch === '\n' && !inQuotes) {
+          rows.push(parseRow(current)); current = '';
+        } else { current += ch; }
+      }
+      if (current.trim()) rows.push(parseRow(current));
+
+      function parseRow(line) {
+        const result = []; let cell = ''; let q = false;
+        for (let ch of line) {
+          if (ch === '"') { q = !q; }
+          else if (ch === ',' && !q) { result.push(cell.trim()); cell = ''; }
+          else { cell += ch; }
+        }
+        result.push(cell.trim());
+        return result;
+      }
+
+      let cardNames = [], dueDates = [], stmtDates = [], nums1 = [], nums2 = [];
+      const monthNames = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+
+      for (const row of rows) {
+        if (row[2] === 'CARDS' && row[3] && !row[3].match(/^\d{4}/)) cardNames = row.slice(3, 12);
+        if (row[2] === 'DUE DATES') dueDates = row.slice(3, 12);
+        if (row[2] === 'STATEMENT GENRATION') stmtDates = row.slice(3, 12);
+        if (row[2] === 'CARDS' && row[3] && row[3].match(/^\d{4}/)) {
+          if (!nums1.length) nums1 = row.slice(3, 12); else nums2 = row.slice(3, 12);
+        }
+        if (monthNames.includes(row[1]?.toUpperCase())) {
+          const amounts = row.slice(3, 12).map(v => parseFloat(v) || 0);
+          const total = parseFloat(row[12]) || amounts.reduce((a, b) => a + b, 0);
+          MONTHS.push({ month: row[1], year: row[2], amounts, total });
+        }
+      }
+
+      console.log('Parsed cards:', cardNames);
+      console.log('Due dates:', dueDates);
+      console.log('Card count:', cardNames.filter(n => n).length);
+
+      for (let i = 0; i < cardNames.length; i++) {
+        if (cardNames[i]) {
+          CARDS.push({
+            id: i,
+            name: cardNames[i],
+            shortName: cardNames[i].split('/')[0].trim(),
+            bank: BANK_MAP[i]?.bank || '',
+            color: BANK_MAP[i]?.color || '#666',
+            cls: BANK_MAP[i]?.cls || '',
+            due: dueDates[i] || '',
+            stmt: stmtDates[i] || '',
+            num1: nums1[i]?.trim() || '',
+            num2: nums2[i]?.trim() || '',
+            numShort: nums1[i] ? '****' + nums1[i].trim().slice(-4) : '',
+            numShort2: nums2[i] ? '****' + nums2[i].trim().slice(-4) : '',
+          });
+        }
+      }
+    }
+
+    function renderAll() {
+      const filter = document.getElementById('monthFilter');
+      filter.innerHTML = '';
+      const now = new Date();
+      const curMonthName = now.toLocaleString('en', { month: 'long' }).toUpperCase();
+      const curYear = String(now.getFullYear());
+      let currentIdx = MONTHS.length - 1;
+
+      MONTHS.forEach((m, i) => {
+        const o = document.createElement('option');
+        o.value = i; o.textContent = `${m.month.charAt(0) + m.month.slice(1).toLowerCase()} ${m.year}`;
+        if (m.month.toUpperCase() === curMonthName && m.year === curYear) { o.selected = true; currentIdx = i; }
+        filter.appendChild(o);
+      });
+      filter.addEventListener('change', () => renderCards(MONTHS[filter.value]));
+      renderCards(MONTHS[currentIdx]);
+      renderTable();
+    }
+
+    function renderCards(md) {
+      const total = md.total;
+      const active = md.amounts.filter(a => a > 0).length;
+      const max = Math.max(...md.amounts);
+      const avg = active > 0 ? total / active : 0;
+      const today = new Date();
+      let dueSoon = 0;
+      CARDS.forEach((c, i) => { if (md.amounts[i] > 0) { const d = parseInt(c.due); if (d) { let diff = d - today.getDate(); if (diff < 0) diff += 30; if (diff <= 7) dueSoon++; } } });
+
+      const paidCount = CARDS.filter((c, i) => md.amounts[i] > 0 && isPaid(md, i)).length;
+
+      document.getElementById('summaryRow').innerHTML = `
+        <div class="s-card"><div class="s-val">₹${fmt(total)}</div><div class="s-label">Total Due</div></div>
+        <div class="s-card"><div class="s-val">${active}</div><div class="s-label">Active Cards</div></div>
+        <div class="s-card"><div class="s-val" style="color:${dueSoon>0?'var(--yellow)':'var(--green)'}">${dueSoon}</div><div class="s-label">Due Soon</div></div>
+        <div class="s-card"><div class="s-val" style="color:${paidCount===active?'var(--green)':'var(--text)'}">${paidCount}/${active}</div><div class="s-label">Paid</div></div>
+      `;
+
+      const grid = document.getElementById('cardsGrid');
+      grid.innerHTML = '';
+
+      CARDS.forEach((card, i) => {
+        const amt = md.amounts[i] || 0;
+        const pct = max > 0 ? (amt / max) * 100 : 0;
+        const dueDay = parseInt(card.due);
+        let daysLeft = dueDay - today.getDate();
+        if (daysLeft < 0) daysLeft += 30;
+        const paid = isPaid(md, i);
+
+        let badge, bCls, daysText, amtColor;
+        if (amt === 0) { badge = 'No Bill'; bCls = 'b-none'; daysText = ''; amtColor = 'var(--t3)'; }
+        else if (paid) { badge = 'Paid'; bCls = 'b-paid'; daysText = '✅ Paid'; amtColor = 'var(--green)'; }
+        else if (daysLeft <= 3) { badge = 'Urgent'; bCls = 'b-danger'; daysText = `🔴 ${daysLeft}d left`; amtColor = 'var(--red)'; }
+        else if (daysLeft <= 7) { badge = 'Due Soon'; bCls = 'b-warn'; daysText = `🟡 ${daysLeft}d left`; amtColor = 'var(--yellow)'; }
+        else { badge = 'On Track'; bCls = 'b-safe'; daysText = `🟢 ${daysLeft}d left`; amtColor = 'var(--green)'; }
+
+        const pColor = bCls === 'b-danger' ? 'var(--red)' : bCls === 'b-warn' ? 'var(--yellow)' : 'var(--green)';
+
+        const el = document.createElement('div');
+        el.className = `cc ${card.cls}${paid ? ' paid' : ''}`;
+        el.innerHTML = `
+          <div class="cc-bar" style="background:${card.color}"></div>
+          <div class="cc-body">
+            <div class="cc-top"><div><div class="cc-name">${card.shortName}</div><div class="cc-bank">${card.bank}</div></div><span class="cc-badge ${bCls}">${badge}</span></div>
+            <div class="cc-num">${card.numShort}${card.numShort2 ? ' / ' + card.numShort2 : ''}</div>
+            <div class="cc-amount" style="color:${amtColor}">₹${fmt(amt)}</div>
+            <div class="cc-dates"><div><div class="cc-dl">Due</div><div class="cc-dv">${card.due||'—'}</div></div><div><div class="cc-dl">Statement</div><div class="cc-dv">${card.stmt||'—'}</div></div></div>
+            ${daysText ? `<div class="cc-days">${daysText}</div>` : ''}
+            ${amt > 0 ? `<div class="cc-progress"><div class="cc-pbar" style="width:${pct}%;background:${pColor}"></div></div>` : ''}
+          </div>
+        `;
+        el.addEventListener('click', () => openModal(card, amt, md, i, paid));
+        grid.appendChild(el);
+      });
+    }
+
+    /* === MODAL === */
+    function openModal(card, amt, md, idx, paid) {
+      document.getElementById('modalBar').style.background = card.color;
+      document.getElementById('modalContent').innerHTML = `
+        <div class="modal-name">${card.name}</div>
+        <div class="modal-bank">${card.bank}</div>
+        <div class="modal-row"><span class="modal-label">Amount</span><span class="modal-val" style="color:var(--accent)">₹${fmt(amt)}</span></div>
+        <div class="modal-row"><span class="modal-label">Due Date</span><span class="modal-val">${card.due || '—'}</span></div>
+        <div class="modal-row"><span class="modal-label">Statement</span><span class="modal-val">${card.stmt || '—'}</span></div>
+        <div class="modal-row"><span class="modal-label">Status</span><span class="modal-val">${paid ? '✅ Paid' : '⏳ Pending'}</span></div>
+        <div class="modal-row"><span class="modal-label">Month</span><span class="modal-val">${md.month} ${md.year}</span></div>
+        <div class="modal-nums">
+          <h4>Card Numbers</h4>
+          ${card.num1 ? `<div class="modal-card-num">${card.num1}</div>` : ''}
+          ${card.num2 ? `<div class="modal-card-num">${card.num2}</div>` : ''}
+        </div>
+        <div style="margin-top:1.5rem;display:flex;gap:.5rem">
+          <input type="number" id="editAmountInput" value="${amt}" placeholder="Amount" style="flex:1;padding:.6rem .8rem;border-radius:10px;border:1px solid var(--gb);background:rgba(255,255,255,.04);color:var(--text);font-family:var(--body);font-size:.85rem;outline:none" />
+          <button class="mark-paid-btn unpaid" id="updateAmountBtn" style="width:auto;padding:.6rem 1.2rem;margin:0">Update</button>
+        </div>
+        <button class="mark-paid-btn ${paid ? 'is-paid' : 'unpaid'}" id="markPaidBtn" style="margin-top:.5rem">${paid ? '↩ Mark as Unpaid' : '✓ Mark as Paid'}</button>
+      `;
+      document.getElementById('updateAmountBtn').addEventListener('click', async () => {
+        const btn = document.getElementById('updateAmountBtn');
+        const input = document.getElementById('editAmountInput');
+        const newAmount = parseFloat(input.value) || 0;
+        btn.textContent = 'Saving...'; btn.disabled = true;
+        try {
+          await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify({ action: 'updateAmount', month: md.month, year: md.year, cardIndex: idx, amount: newAmount })
+          });
+          md.amounts[idx] = newAmount;
+          md.total = md.amounts.reduce((a, b) => a + b, 0);
+          console.log(`Updated amount: ${md.month} ${md.year} card ${idx} = ₹${newAmount}`);
+        } catch (err) { console.error('Update failed:', err); }
+        document.getElementById('modal').classList.remove('open');
+        renderCards(md); renderTable();
+      });
+
+      document.getElementById('markPaidBtn').addEventListener('click', async () => {
+        const btn = document.getElementById('markPaidBtn');
+        btn.textContent = 'Syncing...';
+        btn.disabled = true;
+        await togglePaid(md, idx);
+        document.getElementById('modal').classList.remove('open');
+        renderCards(md);
+        renderTable();
+      });
+      document.getElementById('modal').classList.add('open');
+    }
+
+    document.getElementById('modalClose').addEventListener('click', () => document.getElementById('modal').classList.remove('open'));
+    document.getElementById('modal').addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.classList.remove('open'); });
+
+    /* === PAID STATE (localStorage + Google Sheet sync) === */
+    function paidKey(md, idx) { return `${md.month}_${md.year}_${idx}`; }
+    function isPaid(md, idx) { return !!paidState[paidKey(md, idx)]; }
+
+    async function togglePaid(md, idx) {
+      const k = paidKey(md, idx);
+      const newPaid = !paidState[k];
+
+      // Update locally immediately
+      if (newPaid) paidState[k] = true; else delete paidState[k];
+      localStorage.setItem('tracker_paid', JSON.stringify(paidState));
+
+      // Sync to Google Sheet
+      try {
+        await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({
+            action: 'togglePaid',
+            month: md.month,
+            year: md.year,
+            cardIndex: idx,
+            paid: newPaid
+          })
+        });
+        console.log(`Synced: ${md.month} ${md.year} card ${idx} = ${newPaid ? 'PAID' : 'UNPAID'}`);
+      } catch (err) {
+        console.error('Sheet sync failed:', err);
+      }
+    }
+
+    // Load paid status from Google Sheet on startup
+    async function loadPaidStatus() {
+      try {
+        const res = await fetch(API_URL + '?action=getStatus');
+        const data = await res.json();
+        if (data.success && data.status) {
+          paidState = {};
+          for (const [key, cards] of Object.entries(data.status)) {
+            cards.forEach((card, i) => {
+              if (card.paid) {
+                const [month, year] = key.split('_');
+                paidState[`${month}_${year}_${i}`] = true;
+              }
+            });
+          }
+          localStorage.setItem('tracker_paid', JSON.stringify(paidState));
+          console.log('Paid status loaded from sheet');
+        }
+      } catch (err) {
+        console.log('Using local paid state (sheet sync failed):', err.message);
+      }
+    }
+
+    /* === TABLE === */
+    function renderTable() {
+      document.getElementById('tHead').innerHTML = '<tr><th>Month</th><th>Year</th>' +
+        CARDS.map(c => `<th style="color:${c.color}">${c.shortName}</th>`).join('') + '<th style="color:var(--accent)">Total</th></tr>';
+
+      const curMonth = new Date().toLocaleString('en', { month: 'long' }).toUpperCase();
+
+      document.getElementById('tBody').innerHTML = MONTHS.filter(m => m.total > 0).map(m => {
+        const isCur = m.month.toUpperCase() === curMonth;
+        const monthPaid = CARDS.filter((_, i) => m.amounts[i] > 0 && isPaid(m, i)).length;
+        const monthActive = m.amounts.filter(a => a > 0).length;
+
+        return `<tr class="${isCur ? 'current-row' : ''}">
+          <td>${m.month.charAt(0) + m.month.slice(1).toLowerCase()}</td>
+          <td>${m.year}</td>` +
+          m.amounts.map((a, i) => {
+            const paid = isPaid(m, i);
+            if (a <= 0) return '<td class="cell-zero">—</td>';
+            return `<td class="${paid ? 'cell-paid' : 'cell-unpaid'}">₹${fmt(a)}</td>`;
+          }).join('') +
+          `<td>₹${fmt(m.total)}</td></tr>`;
+      }).join('');
+    }
+
+    function fmt(n) { return n ? Math.round(n).toLocaleString('en-IN') : '0'; }
+  </script>
+</body>
+</html>
