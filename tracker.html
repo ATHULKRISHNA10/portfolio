@@ -375,7 +375,7 @@
       for (const row of rows) {
         if (row[2] === 'CARDS' && row[3] && !row[3].match(/^\d{4}/)) cardNames = row.slice(3, 12);
         if (row[2] === 'DUE DATES') dueDates = row.slice(3, 12);
-        if (row[2] === 'STATEMENT GENRATION') stmtDates = row.slice(3, 12);
+        if (row[2] === 'STATEMENT GENERATION') stmtDates = row.slice(3, 12);
         if (row[2] === 'CARDS' && row[3] && row[3].match(/^\d{4}/)) {
           if (!nums1.length) nums1 = row.slice(3, 12); else nums2 = row.slice(3, 12);
         }
@@ -435,8 +435,23 @@
       const max = Math.max(...md.amounts);
       const avg = active > 0 ? total / active : 0;
       const today = new Date();
+      // Due date is next month after the statement month
+      const monthIdx = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'].indexOf(md.month.toUpperCase());
+      const stmtYear = parseInt(md.year);
+      const dueMonth = monthIdx === 11 ? 0 : monthIdx + 1;
+      const dueYear = monthIdx === 11 ? stmtYear + 1 : stmtYear;
+
       let dueSoon = 0;
-      CARDS.forEach((c, i) => { if (md.amounts[i] > 0) { const d = parseInt(c.due); if (d) { let diff = d - today.getDate(); if (diff < 0) diff += 30; if (diff <= 7) dueSoon++; } } });
+      CARDS.forEach((c, i) => {
+        if (md.amounts[i] > 0 && !isPaid(md, i)) {
+          const d = parseInt(c.due);
+          if (d) {
+            const dueDate = new Date(dueYear, dueMonth, d);
+            const diff = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+            if (diff >= 0 && diff <= 7) dueSoon++;
+          }
+        }
+      });
 
       const paidCount = CARDS.filter((c, i) => md.amounts[i] > 0 && isPaid(md, i)).length;
 
@@ -458,13 +473,14 @@
         const amt = md.amounts[i] || 0;
         const pct = max > 0 ? (amt / max) * 100 : 0;
         const dueDay = parseInt(card.due);
-        let daysLeft = dueDay - today.getDate();
-        if (daysLeft < 0) daysLeft += 30;
+        const dueDate = dueDay ? new Date(dueYear, dueMonth, dueDay) : null;
+        const daysLeft = dueDate ? Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24)) : 999;
         const paid = isPaid(md, i);
 
         let badge, bCls, daysText, amtColor;
         if (amt === 0) { badge = 'No Bill'; bCls = 'b-none'; daysText = ''; amtColor = 'var(--t3)'; }
         else if (paid) { badge = 'Paid'; bCls = 'b-paid'; daysText = '✅ Paid'; amtColor = 'var(--green)'; }
+        else if (daysLeft < 0) { badge = 'Overdue'; bCls = 'b-danger'; daysText = `🔴 ${Math.abs(daysLeft)}d overdue`; amtColor = 'var(--red)'; }
         else if (daysLeft <= 3) { badge = 'Urgent'; bCls = 'b-danger'; daysText = `🔴 ${daysLeft}d left`; amtColor = 'var(--red)'; }
         else if (daysLeft <= 7) { badge = 'Due Soon'; bCls = 'b-warn'; daysText = `🟡 ${daysLeft}d left`; amtColor = 'var(--yellow)'; }
         else { badge = 'On Track'; bCls = 'b-safe'; daysText = `🟢 ${daysLeft}d left`; amtColor = 'var(--green)'; }
