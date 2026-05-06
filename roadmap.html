@@ -1,0 +1,2294 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDE Roadmap — Atlassian, NVIDIA, Akamai, Stripe by October 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  [data-theme="dark"] {
+    --bg: #08090c;
+    --surface: #101115;
+    --surface2: #16181d;
+    --surface3: #1d1f26;
+    --border: #26282f;
+    --border-bright: #3a3d45;
+    --text: #f5f5f7;
+    --text-mid: #a1a4ad;
+    --text-dim: #6b6e77;
+    --green: #10b981;
+    --green-dim: rgba(16,185,129,0.12);
+    --blue: #3b82f6;
+    --blue-dim: rgba(59,130,246,0.12);
+    --violet: #8b5cf6;
+    --violet-dim: rgba(139,92,246,0.12);
+    --amber: #f59e0b;
+    --amber-dim: rgba(245,158,11,0.12);
+    --rose: #f43f5e;
+    --rose-dim: rgba(244,63,94,0.12);
+    --cyan: #06b6d4;
+    --cyan-dim: rgba(6,182,212,0.12);
+    --pink: #ec4899;
+    --pink-dim: rgba(236,72,153,0.12);
+  }
+  [data-theme="light"] {
+    --bg: #f3f7fb;
+    --surface: #ffffff;
+    --surface2: #eef2f7;
+    --surface3: #e4e9ef;
+    --border: #d0d5dd;
+    --border-bright: #b0b8c4;
+    --text: #0b1a2e;
+    --text-mid: #3a4d65;
+    --text-dim: #6b7a8d;
+    --green: #059669;
+    --green-dim: rgba(5,150,105,0.1);
+    --blue: #2563eb;
+    --blue-dim: rgba(37,99,235,0.1);
+    --violet: #7c3aed;
+    --violet-dim: rgba(124,58,237,0.1);
+    --amber: #d97706;
+    --amber-dim: rgba(217,119,6,0.1);
+    --rose: #e11d48;
+    --rose-dim: rgba(225,29,72,0.1);
+    --cyan: #0891b2;
+    --cyan-dim: rgba(8,145,178,0.1);
+    --pink: #db2777;
+    --pink-dim: rgba(219,39,119,0.1);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Instrument Sans', -apple-system, sans-serif;
+    line-height: 1.65; -webkit-font-smoothing: antialiased;
+    transition: background .25s, color .25s;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+
+  /* HERO */
+  .hero {
+    padding: 70px 20px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(16,185,129,0.1), transparent 60%);
+    pointer-events:none;
+  }
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--green); margin-bottom: 18px; position: relative;
+  }
+  .hero h1 {
+    font-size: clamp(34px, 6vw, 60px);
+    font-weight: 700; line-height: 1.1;
+    margin-bottom: 18px; position: relative;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--green), var(--cyan));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: 17px; color: var(--text-mid);
+    max-width: 600px; margin: 0 auto 32px; position: relative;
+  }
+  .target-pills {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    justify-content: center; position: relative;
+    margin-bottom: 28px;
+  }
+  .target-pill {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 8px 16px; border-radius: 100px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.5px;
+  }
+  .target-pill.atl { color: #2684ff; border-color: rgba(38,132,255,0.3); }
+  .target-pill.nv { color: #76b900; border-color: rgba(118,185,0,0.3); }
+  .target-pill.ak { color: #00b4ff; border-color: rgba(0,180,255,0.3); }
+  .target-pill.st { color: #635bff; border-color: rgba(99,91,255,0.3); }
+  .target-pill.other { color: var(--text-mid); }
+
+  /* COUNTDOWN */
+  .countdown {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    max-width: 540px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .countdown-item { text-align: center; }
+  .countdown-item .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 28px; font-weight: 700;
+    color: var(--green);
+    display: block; line-height: 1;
+  }
+  .countdown-item .label {
+    font-size: 10px; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-top: 6px;
+  }
+
+  /* SECTIONS */
+  .section { padding: 60px 0; }
+  .section-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: clamp(24px, 4vw, 34px);
+    font-weight: 700; margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .section-desc {
+    font-size: 15px; color: var(--text-mid);
+    max-width: 660px; margin-bottom: 32px;
+  }
+
+  /* SALARY REALITY */
+  .salary-reality {
+    background: linear-gradient(135deg, rgba(16,185,129,0.05), rgba(6,182,212,0.03));
+    border: 1px solid rgba(16,185,129,0.15);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+  .salary-reality h3 {
+    font-size: 17px; font-weight: 700;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .salary-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  .salary-cell {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .salary-cell .name {
+    font-size: 12px; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .salary-cell .median {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px; font-weight: 700;
+    color: var(--green);
+  }
+  .salary-cell .range {
+    font-size: 12px; color: var(--text-mid);
+    margin-top: 4px;
+  }
+  .salary-cell.you .median { color: var(--text-dim); }
+  .salary-cell.you { border-color: var(--border-bright); }
+
+  /* COMPANY CARDS */
+  .company-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+  }
+  .company-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    transition: all 0.2s;
+  }
+  .company-card:hover {
+    border-color: var(--border-bright);
+    transform: translateY(-1px);
+  }
+  .company-card .logo-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .company-card .name {
+    font-size: 18px; font-weight: 700;
+  }
+  .company-card .difficulty {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    padding: 3px 8px; border-radius: 4px;
+  }
+  .diff-medium { background: var(--amber-dim); color: var(--amber); }
+  .diff-hard { background: var(--rose-dim); color: var(--rose); }
+  .diff-extreme { background: rgba(244,63,94,0.2); color: var(--rose); border: 1px solid var(--rose); }
+
+  .company-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+  .company-card .blurb {
+    font-size: 13px; color: var(--text-mid);
+    margin-bottom: 14px; line-height: 1.6;
+  }
+  .company-card h5 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 14px; margin-bottom: 6px;
+  }
+  .company-card ul {
+    list-style: none; font-size: 13px; color: var(--text-mid);
+  }
+  .company-card ul li {
+    padding-left: 14px; position: relative;
+    margin-bottom: 4px;
+  }
+  .company-card ul li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--text-dim);
+  }
+  .company-card .wlb {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .wlb-bar {
+    flex: 1; height: 4px; background: var(--surface3);
+    border-radius: 2px; overflow: hidden;
+  }
+  .wlb-fill { height: 100%; border-radius: 2px; }
+  .wlb-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-dim); }
+
+  /* TIER DIRECTORY */
+  .tier-block { margin-bottom: 26px; }
+  .tier-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px; padding: 14px 18px;
+    border-radius: 10px; border: 1px solid;
+  }
+  .tier-header.tier-s { background: linear-gradient(90deg, rgba(16,185,129,0.1), transparent); border-color: rgba(16,185,129,0.3); }
+  .tier-header.tier-a { background: linear-gradient(90deg, rgba(59,130,246,0.1), transparent); border-color: rgba(59,130,246,0.3); }
+  .tier-header.tier-b { background: linear-gradient(90deg, rgba(245,158,11,0.1), transparent); border-color: rgba(245,158,11,0.3); }
+  .tier-header.tier-c { background: linear-gradient(90deg, rgba(139,92,246,0.1), transparent); border-color: rgba(139,92,246,0.3); }
+  .tier-header.tier-d { background: linear-gradient(90deg, rgba(6,182,212,0.1), transparent); border-color: rgba(6,182,212,0.3); }
+  .tier-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 16px; font-weight: 700;
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .tier-badge.tier-s { background: rgba(16,185,129,0.2); color: var(--green); }
+  .tier-badge.tier-a { background: rgba(59,130,246,0.2); color: var(--blue); }
+  .tier-badge.tier-b { background: rgba(245,158,11,0.2); color: var(--amber); }
+  .tier-badge.tier-c { background: rgba(139,92,246,0.2); color: var(--violet); }
+  .tier-badge.tier-d { background: rgba(6,182,212,0.2); color: var(--cyan); }
+  .tier-info { flex: 1; min-width: 0; }
+  .tier-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+  .tier-info .desc { font-size: 12px; color: var(--text-mid); line-height: 1.5; }
+
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
+  }
+  .mini-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    transition: all 0.15s;
+  }
+  .mini-card:hover { border-color: var(--border-bright); transform: translateY(-1px); }
+  .mini-card .mname {
+    font-size: 14px; font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .mini-card .mpay {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: var(--green);
+    margin-bottom: 6px;
+  }
+  .mini-card .mnote {
+    font-size: 11.5px; color: var(--text-mid);
+    line-height: 1.5;
+  }
+  .mini-card .ratings {
+    display: flex; gap: 4px;
+    margin-top: 8px; padding-top: 8px;
+    border-top: 1px solid var(--border);
+    font-size: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    flex-wrap: wrap;
+  }
+  .rating-pill {
+    padding: 2px 6px; border-radius: 3px;
+    letter-spacing: 0.3px;
+  }
+  .rate-high { background: var(--green-dim); color: var(--green); }
+  .rate-mid { background: var(--amber-dim); color: var(--amber); }
+  .rate-low { background: var(--rose-dim); color: var(--rose); }
+
+  .netflix-callout {
+    background: linear-gradient(135deg, rgba(229,9,20,0.06), rgba(229,9,20,0.02));
+    border: 1px solid rgba(229,9,20,0.25);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin: 24px 0;
+    font-size: 13.5px;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+  .netflix-callout h4 {
+    color: #e50914;
+    font-size: 14px;
+    margin-bottom: 6px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .stability-criteria {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 28px;
+  }
+  .stability-criteria h3 {
+    font-size: 16px; font-weight: 700;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+  }
+  .criteria-item {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+  .criteria-item .ck {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    color: var(--green);
+    display: block; margin-bottom: 4px;
+  }
+  .criteria-item .ck.no { color: var(--rose); }
+  .criteria-item .txt { color: var(--text-mid); line-height: 1.5; }
+
+  /* RESOURCE TABLE */
+  .resource-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .resource-block h3 {
+    font-size: 16px; font-weight: 700;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .resource-block.have h3 { color: var(--green); }
+  .resource-block.buy h3 { color: var(--amber); }
+  .resource-block.free h3 { color: var(--cyan); }
+  .resource-block.skip h3 { color: var(--rose); }
+
+  .resource-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .resource-item:first-of-type { border-top: none; padding-top: 0; }
+  .resource-item .info { font-size: 14px; }
+  .resource-item .info .title { font-weight: 600; margin-bottom: 2px; }
+  .resource-item .info .why { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+  .resource-item .price {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px; font-weight: 600;
+    color: var(--text-mid);
+    text-align: right;
+    white-space: nowrap;
+  }
+  .resource-item .price.green { color: var(--green); }
+  .resource-item .price.amber { color: var(--amber); }
+  .resource-item .price.rose { color: var(--rose); }
+
+  .priority-tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; font-weight: 700;
+    padding: 2px 6px; border-radius: 3px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .priority-must { background: var(--rose-dim); color: var(--rose); }
+  .priority-strong { background: var(--amber-dim); color: var(--amber); }
+  .priority-nice { background: var(--cyan-dim); color: var(--cyan); }
+
+  /* PHASE BLOCKS */
+  .phase {
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .phase-head {
+    padding: 22px 24px;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 14px;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .phase-head:hover { background: var(--surface2); }
+  .phase-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 5px;
+  }
+  .phase-head h3 { font-size: 18px; font-weight: 700; }
+  .phase-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: var(--text-dim);
+  }
+  .phase-toggle {
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-mid);
+    font-size: 14px;
+    transition: transform 0.2s;
+  }
+  .phase.open .phase-toggle { transform: rotate(180deg); }
+  .phase-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+  .phase.open .phase-body { max-height: 8000px; }
+  .phase-content { padding: 0 24px 24px; }
+  .phase-why {
+    font-size: 14px; color: var(--text-mid);
+    margin-bottom: 22px;
+    padding: 14px 16px;
+    background: var(--surface2);
+    border-radius: 10px;
+    border-left: 3px solid;
+  }
+
+  /* WEEK BLOCKS */
+  .week {
+    margin-bottom: 18px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+  }
+  .week:first-of-type { border-top: none; padding-top: 0; }
+  .week-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .week-title .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    display: inline-block;
+  }
+  .task {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 13.5px;
+  }
+  .task:last-child { border-bottom: none; }
+  .task-check {
+    flex-shrink: 0;
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--border-bright);
+    border-radius: 5px;
+    margin-top: 2px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    background: transparent;
+  }
+  .task-check.done {
+    background: var(--green); border-color: var(--green);
+  }
+  .task-check.done::after {
+    content: '✓'; color: var(--bg);
+    font-size: 11px; font-weight: 700;
+  }
+  .task-body .main { color: var(--text); line-height: 1.55; }
+  .task-body .resource {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: var(--blue);
+    display: block; margin-top: 2px;
+  }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    padding: 2px 6px; border-radius: 3px;
+    display: inline-block; margin-left: 4px;
+    vertical-align: middle;
+  }
+  .tag-target { background: var(--rose-dim); color: var(--rose); }
+  .tag-mock { background: var(--violet-dim); color: var(--violet); }
+  .tag-project { background: var(--amber-dim); color: var(--amber); }
+  .tag-apply { background: var(--green-dim); color: var(--green); }
+  .tag-key { background: var(--cyan-dim); color: var(--cyan); }
+
+  .output {
+    background: var(--surface2);
+    border: 1px dashed rgba(16,185,129,0.3);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 18px;
+  }
+  .output h5 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green); margin-bottom: 6px;
+  }
+  .output p { font-size: 13px; color: var(--text-mid); line-height: 1.65; }
+
+  /* Phase colors */
+  .p0 .phase-num { background: var(--green-dim); color: var(--green); }
+  .p0 .phase-why { border-left-color: var(--green); }
+  .p0 .week-title .dot { background: var(--green); }
+  .p1 .phase-num { background: var(--blue-dim); color: var(--blue); }
+  .p1 .phase-why { border-left-color: var(--blue); }
+  .p1 .week-title .dot { background: var(--blue); }
+  .p2 .phase-num { background: var(--violet-dim); color: var(--violet); }
+  .p2 .phase-why { border-left-color: var(--violet); }
+  .p2 .week-title .dot { background: var(--violet); }
+  .p3 .phase-num { background: var(--amber-dim); color: var(--amber); }
+  .p3 .phase-why { border-left-color: var(--amber); }
+  .p3 .week-title .dot { background: var(--amber); }
+  .p4 .phase-num { background: var(--cyan-dim); color: var(--cyan); }
+  .p4 .phase-why { border-left-color: var(--cyan); }
+  .p4 .week-title .dot { background: var(--cyan); }
+  .p5 .phase-num { background: var(--pink-dim); color: var(--pink); }
+  .p5 .phase-why { border-left-color: var(--pink); }
+  .p5 .week-title .dot { background: var(--pink); }
+  .p6 .phase-num { background: var(--rose-dim); color: var(--rose); }
+  .p6 .phase-why { border-left-color: var(--rose); }
+  .p6 .week-title .dot { background: var(--rose); }
+
+  /* PATTERN GRID */
+  .pattern-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .pattern-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .pattern-card .pname {
+    font-size: 13px; font-weight: 600; margin-bottom: 4px;
+  }
+  .pattern-card .pcount {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  /* SCHEDULE */
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 10px;
+  }
+  .sched-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+  }
+  .sched-card .time {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+  .sched-card .activity {
+    font-size: 16px; font-weight: 700; margin-bottom: 6px;
+  }
+  .sched-card .detail { font-size: 12px; color: var(--text-mid); line-height: 1.5; }
+
+  /* MISTAKES */
+  .mistakes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+  }
+  .mistake {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+  }
+  .mistake .bad {
+    color: var(--rose); font-weight: 600;
+    font-size: 14px; margin-bottom: 6px;
+  }
+  .mistake .good { color: var(--text-mid); font-size: 13px; line-height: 1.55; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 70px 20px 40px;
+  }
+  .footer .big {
+    font-size: 26px; font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .footer .big em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--green), var(--cyan));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .footer p { font-size: 13px; color: var(--text-dim); }
+
+  /* LOGIN GATE */
+  .login-gate{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;
+    background:var(--bg);
+    background-image:radial-gradient(ellipse 60% 50% at 30% 40%,rgba(16,185,129,.04),transparent),
+                      radial-gradient(ellipse 50% 60% at 70% 60%,rgba(59,130,246,.03),transparent);
+  }
+  .login-box{
+    background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:3rem 2.5rem;
+    width:380px;text-align:center;box-shadow:0 6px 24px rgba(0,0,0,.3);position:relative;overflow:hidden;
+  }
+  .login-box::before{
+    content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+    background:conic-gradient(from 0deg,transparent,rgba(16,185,129,.05),transparent,rgba(59,130,246,.03),transparent);
+    animation:login-rotate 8s linear infinite;
+  }
+  @keyframes login-rotate{to{transform:rotate(360deg)}}
+  .login-content{position:relative;z-index:1}
+  .login-avatar{width:64px;height:64px;border-radius:50%;background:var(--green-dim);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;border:2px solid var(--border)}
+  .login-avatar svg{width:28px;height:28px;color:var(--green)}
+  .login-box h2{font-family:'Instrument Sans',sans-serif;font-size:1.3rem;margin-bottom:.3rem}
+  .login-box h2 span{color:var(--green)}
+  .login-box .login-sub{font-size:.8rem;color:var(--text-dim);margin-bottom:2rem}
+  .input-wrap{position:relative;margin-bottom:1rem}
+  .input-wrap input{
+    width:100%;padding:.85rem 1rem .85rem 2.8rem;border-radius:14px;border:1px solid var(--border);
+    background:rgba(255,255,255,.04);color:var(--text);font-family:'Instrument Sans',sans-serif;
+    font-size:.88rem;outline:none;transition:border-color .3s;
+  }
+  .input-wrap input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(16,185,129,.1)}
+  .input-wrap input::placeholder{color:var(--text-dim)}
+  .input-wrap svg{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--text-dim)}
+  .login-btn{
+    width:100%;padding:.85rem;border-radius:14px;border:none;
+    background:var(--green);color:#020a06;font-weight:700;font-size:.9rem;font-family:'Instrument Sans',sans-serif;
+    cursor:pointer;transition:all .2s;
+  }
+  .login-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(16,185,129,.3)}
+  .login-error{color:var(--rose);font-size:.78rem;margin-top:.75rem;display:none}
+
+  /* FLOATING NAV */
+  .float-nav{
+    position:fixed;top:16px;right:16px;z-index:999;
+    display:flex;gap:8px;
+  }
+  .float-nav a,.float-nav button{
+    padding:8px 14px;border-radius:10px;border:1px solid var(--border);
+    background:var(--surface);color:var(--text-mid);font-size:12px;font-family:'IBM Plex Mono',monospace;
+    cursor:pointer;transition:all .2s;text-decoration:none;
+    backdrop-filter:blur(12px);
+  }
+  .float-nav a:hover,.float-nav button:hover{border-color:var(--green);color:var(--green)}
+
+  .roadmap-wrap{display:none}
+
+  @media (max-width: 600px) {
+    .countdown { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .phase-head { grid-template-columns: 1fr auto; gap: 8px; }
+    .phase-head .phase-num { grid-row: 1; }
+    .phase-head h3 { grid-column: 1 / -1; }
+    .phase-head .phase-meta { grid-row: 1; grid-column: 2; }
+    .phase-content { padding: 0 16px 18px; }
+    .phase-head { padding: 18px 16px; }
+    .float-nav{top:8px;right:8px;gap:4px}
+    .float-nav a,.float-nav button{padding:6px 10px;font-size:10px}
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN GATE -->
+<div class="login-gate" id="loginGate">
+  <div class="login-box">
+    <div class="login-content">
+      <div class="login-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <h2>SDE <span>Roadmap</span></h2>
+      <p class="login-sub">Enter your password to continue</p>
+      <div class="input-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+        <input type="password" id="passInput" placeholder="Password" autocomplete="off" />
+      </div>
+      <button class="login-btn" id="loginBtn">Unlock Roadmap</button>
+      <p class="login-error" id="loginError">Incorrect password. Try again.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING NAV -->
+<div class="float-nav" id="floatNav" style="display:none">
+  <a href="index.html">Portfolio</a>
+  <a href="tracker.html">Card Tracker</a>
+  <button id="themeBtn">☀️</button>
+</div>
+
+<!-- ROADMAP CONTENT -->
+<div class="roadmap-wrap" id="roadmapWrap">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">5-Month Sprint · Backend SDE → Top Product Co</div>
+  <h1>Land at <em>Atlassian, Stripe,</em><br>NVIDIA, or Akamai by October</h1>
+  <p class="hero-sub">A no-fluff, week-by-week plan for a backend SDE with <strong>4 years of experience</strong> targeting Senior SDE / SDE 2 roles. Relearn DSA, master system design, crack the toughest interview loops — and land in a 5–10 year career home with great WLB.</p>
+
+  <div class="target-pills">
+    <span class="target-pill atl">Atlassian</span>
+    <span class="target-pill nv">NVIDIA</span>
+    <span class="target-pill ak">Akamai</span>
+    <span class="target-pill st">Stripe</span>
+    <span class="target-pill" style="color:#e34850; border-color:rgba(227,72,80,0.3)">Adobe</span>
+    <span class="target-pill" style="color:#5cb6f7; border-color:rgba(92,182,247,0.3)">Microsoft</span>
+    <span class="target-pill" style="color:#ff7e5e; border-color:rgba(255,126,94,0.3)">Cisco</span>
+    <span class="target-pill" style="color:#7b9aff; border-color:rgba(123,154,255,0.3)">SAP Labs</span>
+    <span class="target-pill other">+ 20 more stable picks</span>
+  </div>
+
+  <div class="countdown">
+    <div class="countdown-item">
+      <span class="num">21</span>
+      <span class="label">Weeks Left</span>
+    </div>
+    <div class="countdown-item">
+      <span class="num">3-4h</span>
+      <span class="label">Daily</span>
+    </div>
+    <div class="countdown-item">
+      <span class="num">300+</span>
+      <span class="label">Problems</span>
+    </div>
+    <div class="countdown-item">
+      <span class="num">₹50-80L</span>
+      <span class="label">SDE 2 Target</span>
+    </div>
+  </div>
+</section>
+
+<!-- SALARY REALITY -->
+<div class="container">
+  <section class="section">
+    <div class="section-eyebrow">Reality Check · Senior SDE Bands</div>
+    <h2 class="section-title">At 4 YOE, You Should Target ₹50-80L+</h2>
+    <p class="section-desc">You're not a fresher. With 4 years of production backend experience at a startup, you map to <strong>SDE 2 / Senior SDE / P40-P50 / IC2-IC3 / L2</strong> levels at these companies. Here's what those specific bands pay in India (Levels.fyi + market data, May 2026).</p>
+
+    <div class="salary-reality">
+      <h3>Your Real Target: ₹50-80L Total Comp · Floor ₹40L</h3>
+      <div class="salary-comparison">
+        <div class="salary-cell you">
+          <div class="name">You Today</div>
+          <div class="median">₹17.6L</div>
+          <div class="range">Startup SDE · 4 YOE</div>
+        </div>
+        <div class="salary-cell">
+          <div class="name">Akamai · Sr SE</div>
+          <div class="median">₹35-55L</div>
+          <div class="range">Floor pick · 100%+ hike</div>
+        </div>
+        <div class="salary-cell">
+          <div class="name">Microsoft · SDE 2</div>
+          <div class="median">₹35-52L</div>
+          <div class="range">Solid mid-tier</div>
+        </div>
+        <div class="salary-cell">
+          <div class="name">Adobe · MTS 2</div>
+          <div class="median">₹40-65L</div>
+          <div class="range">Best WLB+pay combo</div>
+        </div>
+        <div class="salary-cell">
+          <div class="name">NVIDIA · IC2-IC3</div>
+          <div class="median">₹50-85L</div>
+          <div class="range">AI premium · RSU upside</div>
+        </div>
+        <div class="salary-cell">
+          <div class="name">Atlassian · P40-P50</div>
+          <div class="median">₹55-99L</div>
+          <div class="range">Median P50: ₹99L</div>
+        </div>
+        <div class="salary-cell">
+          <div class="name">Stripe · L2</div>
+          <div class="median">₹70-130L</div>
+          <div class="range">Pre-IPO · highest ceiling</div>
+        </div>
+      </div>
+      <p style="margin-top:18px; font-size:13px; color:var(--text-mid); line-height:1.7;">
+        <strong style="color:var(--green)">Math you should internalize:</strong> Even the "lowest" pick (Akamai Senior SE) gives you a <strong>~120% hike</strong>. Microsoft SDE 2 = <strong>~150%</strong>. Atlassian P50 = <strong>~250-450%</strong>. Stripe L2 = <strong>~300-600%</strong>. Don't anchor to your current ₹17.6L. Anchor to the band of the role you're applying for.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4 YOE TAKEAWAYS -->
+  <section class="section">
+    <div class="section-eyebrow">4 YOE Strategic Takeaways</div>
+    <h2 class="section-title">What Changes Because You're Senior, Not Junior</h2>
+    <p class="section-desc">Most roadmaps online are for freshers. At 4 YOE, the game shifts in 6 important ways.</p>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:14px;">
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:22px; border-left:3px solid var(--green);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--green); letter-spacing:1px; margin-bottom:8px;">SHIFT 01 · INTERVIEW WEIGHT</div>
+        <h4 style="font-size:16px; font-weight:700; margin-bottom:10px;">System Design = 35-40%, not 15%</h4>
+        <p style="font-size:13.5px; color:var(--text-mid); line-height:1.65;">At 4 YOE you'll likely face <strong>2 system design rounds</strong> (one HLD, one deep-dive). Add 1-2 weeks to system design prep. Your 4 years of real backend experience is GOLD here — most SDE 2 candidates fake it. You won't have to.</p>
+      </div>
+
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:22px; border-left:3px solid var(--blue);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--blue); letter-spacing:1px; margin-bottom:8px;">SHIFT 02 · CODING DEPTH</div>
+        <h4 style="font-size:16px; font-weight:700; margin-bottom:10px;">LC Medium → Hard, fewer Easy</h4>
+        <p style="font-size:13.5px; color:var(--text-mid); line-height:1.65;">SDE 2 interviews skip warm-up Easy problems. Expect <strong>medium right away, then hard or 2 mediums in 45 min</strong>. Stripe and Atlassian especially go straight to LC Hard. Allocate 70% Medium, 25% Hard, 5% Easy in your prep mix.</p>
+      </div>
+
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:22px; border-left:3px solid var(--violet);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--violet); letter-spacing:1px; margin-bottom:8px;">SHIFT 03 · BEHAVIORAL</div>
+        <h4 style="font-size:16px; font-weight:700; margin-bottom:10px;">Leadership stories, not just teamwork</h4>
+        <p style="font-size:13.5px; color:var(--text-mid); line-height:1.65;">Behavioral rounds will probe: <strong>Did you mentor anyone? Have you led a project? Resolved a technical disagreement? Made a tradeoff call?</strong> If you don't have these stories, build them in your current job before October. Every SDE 2 round will ask.</p>
+      </div>
+
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:22px; border-left:3px solid var(--amber);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--amber); letter-spacing:1px; margin-bottom:8px;">SHIFT 04 · DEPTH ROUND</div>
+        <h4 style="font-size:16px; font-weight:700; margin-bottom:10px;">Past project deep-dive interviews</h4>
+        <p style="font-size:13.5px; color:var(--text-mid); line-height:1.65;">Many SDE 2 loops include a <strong>"tell me about your most complex project"</strong> round where they probe for 30-45 min. Pick 2-3 hardest projects from Circuit House. Document architecture, scale, tradeoffs, your specific contributions. Have war stories ready.</p>
+      </div>
+
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:22px; border-left:3px solid var(--cyan);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--cyan); letter-spacing:1px; margin-bottom:8px;">SHIFT 05 · NEGOTIATION</div>
+        <h4 style="font-size:16px; font-weight:700; margin-bottom:10px;">Never reveal ₹17.6L · Never accept SDE 1</h4>
+        <p style="font-size:13.5px; color:var(--text-mid); line-height:1.65;">Recruiters will try to pin your offer to your current pay. Refuse. <strong>"I'm interviewing at the SDE 2 level; I'm looking at total comp in the ₹50-65L range based on Levels.fyi."</strong> If they offer SDE 1 / junior — that's a step backward at your YOE. Walk away.</p>
+      </div>
+
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:22px; border-left:3px solid var(--rose);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--rose); letter-spacing:1px; margin-bottom:8px;">SHIFT 06 · YOUR EDGE</div>
+        <h4 style="font-size:16px; font-weight:700; margin-bottom:10px;">Startup SDE 4yr = strong narrative</h4>
+        <p style="font-size:13.5px; color:var(--text-mid); line-height:1.65;">At a startup with 4 YOE, you've worn many hats: backend + ops + on-call + cross-cloud. <strong>This is exactly what product cos want at SDE 2.</strong> Lead every interview by framing this: "I've owned X end-to-end, deployed across AWS/GCP/Azure, debugged production at 2am." That's senior signal.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:20px; padding:18px 22px; background:linear-gradient(135deg, rgba(245,158,11,0.06), rgba(244,63,94,0.04)); border-radius:12px; border:1px solid rgba(245,158,11,0.2); font-size:13.5px; color:var(--text-mid); line-height:1.7;">
+      <strong style="color:var(--amber); display:block; margin-bottom:6px;">⚠ The Trap to Avoid</strong>
+      Some companies (especially when they sense low current pay) will offer you <strong>SDE 1 / Junior level</strong> at "good Indian salary" like ₹25-30L. This LOOKS like a 50% hike — but it's a <strong>career step backward</strong> because (a) you'll be peer'd with 0-2 YOE engineers, (b) leveling up takes 18-24 months, (c) future companies will reference this junior level. Always interview AT the level your YOE warrants. Better to wait 2 more months for a Senior offer than to take a junior one.
+    </div>
+  </section>
+
+  <!-- COMPANY INTEL -->
+  <section class="section">
+    <div class="section-eyebrow">Target Intel · Your Top 4</div>
+    <h2 class="section-title">What Each Company Actually Tests</h2>
+    <p class="section-desc">Each of your named targets has its own interview personality. Below them, you'll find a stability-ranked directory of 25+ more companies — because spreading wide is critical for landing a 5–10 year career home.</p>
+
+    <div class="company-grid">
+
+      <div class="company-card">
+        <div class="logo-row">
+          <div class="name" style="color:#2684ff">Atlassian</div>
+          <span class="difficulty diff-hard">Hard</span>
+        </div>
+        <div class="company-meta">SDE 2 / P40-P50 · ₹55–99L (Median P50: ₹99L)</div>
+        <p class="blurb">Strong on culture fit. Standard SWE loop with system design, coding, and a values interview. Best WLB of the four. At 4 YOE you target P40-P50.</p>
+        <h5>Loop Structure (Senior level)</h5>
+        <ul>
+          <li>Online assessment (HackerRank)</li>
+          <li>Recruiter screen</li>
+          <li>2 coding rounds (LC Medium-Hard)</li>
+          <li>2 system design rounds (HLD + drill-down)</li>
+          <li>Values interview · technical leadership probe</li>
+        </ul>
+        <h5>What to focus on</h5>
+        <ul>
+          <li>Trees, graphs, dynamic programming</li>
+          <li>System design — distributed systems</li>
+          <li>STAR stories: ownership, mentoring, tradeoffs</li>
+        </ul>
+        <div class="wlb">
+          <span class="wlb-label">WLB</span>
+          <div class="wlb-bar"><div class="wlb-fill" style="width:90%; background:var(--green)"></div></div>
+          <span class="wlb-label">9/10</span>
+        </div>
+      </div>
+
+      <div class="company-card">
+        <div class="logo-row">
+          <div class="name" style="color:#76b900">NVIDIA</div>
+          <span class="difficulty diff-hard">Hard</span>
+        </div>
+        <div class="company-meta">SDE 2 / IC2-IC3 · ₹50–85L (RSU upside huge)</div>
+        <p class="blurb">Deep technical interviews. Tests OS, networks, systems thinking. C/C++ helpful but not required for software roles. AI boom = currently hiring aggressively for IC3 senior roles.</p>
+        <h5>Loop Structure (Senior level)</h5>
+        <ul>
+          <li>Online coding test (HackerRank)</li>
+          <li>Hiring manager screen + project deep-dive</li>
+          <li>3-4 technical rounds (LC Medium-Hard)</li>
+          <li>OS / networks / debugging round</li>
+          <li>System design + concurrency questions</li>
+        </ul>
+        <h5>What to focus on</h5>
+        <ul>
+          <li>Strong CS fundamentals (OS, networks)</li>
+          <li>Low-level systems thinking</li>
+          <li>Multi-threading, concurrency, locks</li>
+        </ul>
+        <div class="wlb">
+          <span class="wlb-label">WLB</span>
+          <div class="wlb-bar"><div class="wlb-fill" style="width:70%; background:var(--amber)"></div></div>
+          <span class="wlb-label">7/10</span>
+        </div>
+      </div>
+
+      <div class="company-card">
+        <div class="logo-row">
+          <div class="name" style="color:#00b4ff">Akamai</div>
+          <span class="difficulty diff-medium">Medium</span>
+        </div>
+        <div class="company-meta">Senior SE / SE 2 · ₹35–55L · Floor pick</div>
+        <p class="blurb">Tests OS, networks, DBMS, OOP, DSA, Linux, Docker, DevOps. Your cloud + Docker + 4 yr backend experience is a huge edge here. Most attainable of your 4 picks.</p>
+        <h5>Loop Structure (Senior level)</h5>
+        <ul>
+          <li>Online assessment (MCQs + coding)</li>
+          <li>Technical interview (DSA + fundamentals)</li>
+          <li>System design (lighter than FAANG)</li>
+          <li>Project deep-dive on past work</li>
+          <li>Managerial / HR round</li>
+        </ul>
+        <h5>What to focus on</h5>
+        <ul>
+          <li>OS, networks, DBMS theory</li>
+          <li>Linux, Docker, DevOps (you have this!)</li>
+          <li>Medium DSA — less brutal than Stripe</li>
+        </ul>
+        <div class="wlb">
+          <span class="wlb-label">WLB</span>
+          <div class="wlb-bar"><div class="wlb-fill" style="width:85%; background:var(--green)"></div></div>
+          <span class="wlb-label">8.5/10</span>
+        </div>
+      </div>
+
+      <div class="company-card">
+        <div class="logo-row">
+          <div class="name" style="color:#635bff">Stripe</div>
+          <span class="difficulty diff-extreme">Extreme</span>
+        </div>
+        <div class="company-meta">SE 2 / L2 · ₹70–130L · Pre-IPO upside</div>
+        <p class="blurb">Highest bar. Pragmatic, real-world coding with messy data, transactions, payments scenarios. Expects production-quality code. At 4 YOE you target L2 — same band where median India total comp is ₹96L.</p>
+        <h5>Loop Structure (Senior level)</h5>
+        <ul>
+          <li>Online HackerRank assessment</li>
+          <li>Practical coding (CSV parsing, API building, debugging)</li>
+          <li>Integration / API round</li>
+          <li>System design (idempotency, distributed transactions)</li>
+          <li>Bug-squash round (debug real code)</li>
+        </ul>
+        <h5>What to focus on</h5>
+        <ul>
+          <li>Real-world coding, not just LC tricks</li>
+          <li>Reading & debugging unfamiliar code</li>
+          <li>API design, idempotency, transactions</li>
+        </ul>
+        <div class="wlb">
+          <span class="wlb-label">WLB</span>
+          <div class="wlb-bar"><div class="wlb-fill" style="width:65%; background:var(--amber)"></div></div>
+          <span class="wlb-label">6.5/10</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="netflix-callout">
+      <h4>● Why Netflix isn't on this list</h4>
+      <p>Netflix's India office (Mumbai) is primarily Content, Marketing, PR, and Operations — <strong>not engineering</strong>. Glassdoor shows only ~6 jobs total in India. Their global SWE comp is unmatched (median ~₹2.6 Cr in the US), but it's not a realistic India target. Don't waste prep time here. If you really want a Netflix-style culture in India, target <strong>Stripe, Atlassian, or Datadog</strong> — same DNA, real hiring.</p>
+    </div>
+
+    <div class="stability-criteria">
+      <h3>How I'm Ranking for "5–10 Year Tenure"</h3>
+      <div class="criteria-grid">
+        <div class="criteria-item">
+          <span class="ck">✓ FAVOR</span>
+          <span class="txt">Profitable companies (not pre-IPO unicorns burning cash)</span>
+        </div>
+        <div class="criteria-item">
+          <span class="ck">✓ FAVOR</span>
+          <span class="txt">Diverse product portfolio (one-product = single point of failure)</span>
+        </div>
+        <div class="criteria-item">
+          <span class="ck">✓ FAVOR</span>
+          <span class="txt">Enterprise B2B customers (more stable revenue than consumer)</span>
+        </div>
+        <div class="criteria-item">
+          <span class="ck">✓ FAVOR</span>
+          <span class="txt">Companies that DIDN'T do mass layoffs in 2022–2026</span>
+        </div>
+        <div class="criteria-item">
+          <span class="ck no">✗ AVOID</span>
+          <span class="txt">Companies pivoting hard on AI (likely to restructure teams again)</span>
+        </div>
+        <div class="criteria-item">
+          <span class="ck no">✗ AVOID</span>
+          <span class="txt">Companies with major recent layoffs (Oracle 30K, Meta 8K in 2026)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-eyebrow" style="margin-top:32px; margin-bottom:8px;">The Stability Directory</div>
+    <h2 class="section-title" style="font-size:24px; margin-bottom:8px;">25+ Companies Ranked by 5–10 Year Stability</h2>
+    <p class="section-desc">Each card shows pay range · stability rating (S = highest) · WLB rating · interview difficulty. Cast wide. Apply to 30+ across these tiers.</p>
+
+    <!-- TIER S -->
+    <div class="tier-block">
+      <div class="tier-header tier-s">
+        <div class="tier-badge tier-s">S</div>
+        <div class="tier-info">
+          <h4>Tier S — Maximum Stability + WLB + Solid Pay</h4>
+          <div class="desc">No mass layoffs in 4+ years. Profitable. Established. Best for 5–10 year tenure. Lower ceiling than Tier B but you'll sleep at night.</div>
+        </div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini-card">
+          <div class="mname">Adobe India</div>
+          <div class="mpay">MTS 2 · ₹40-65L</div>
+          <div class="mnote">Bangalore + Noida. Known as "best WLB in tech." Photoshop/Acrobat = recession-proof products. Very stable hiring.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab S</span><span class="rating-pill rate-high">WLB 9.5</span><span class="rating-pill rate-mid">Hard</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Atlassian (your pick)</div>
+          <div class="mpay">P40-P50 · ₹55-99L</div>
+          <div class="mnote">Bangalore. Profitable, no layoffs. Jira/Confluence cash flow is durable. Median P50 = ₹99L. Strong remote-first culture.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab S</span><span class="rating-pill rate-high">WLB 9</span><span class="rating-pill rate-mid">Hard</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Akamai (your pick)</div>
+          <div class="mpay">Sr SE · ₹35-55L</div>
+          <div class="mnote">Bangalore. Slow but rock-solid. CDN biz is critical infra. Most attainable of stable picks. Floor target.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab S</span><span class="rating-pill rate-high">WLB 8.5</span><span class="rating-pill rate-high">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">SAP Labs India</div>
+          <div class="mpay">Sr Dev · ₹35-65L</div>
+          <div class="mnote">Bangalore. Massive German enterprise software co. ERP = sticky. 4-day weeks, 9-to-5 culture. Slow growth.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab S</span><span class="rating-pill rate-high">WLB 9.5</span><span class="rating-pill rate-high">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Cisco India</div>
+          <div class="mpay">Tech Lead · ₹35-60L</div>
+          <div class="mnote">Bangalore. Networking giant. Has done some layoffs but core SDE roles stable. Excellent benefits + RSU.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab S</span><span class="rating-pill rate-high">WLB 8.5</span><span class="rating-pill rate-high">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Intuit India</div>
+          <div class="mpay">SDE 2 · ₹45-75L</div>
+          <div class="mnote">Bangalore. TurboTax/QuickBooks = recurring revenue. Known for top WLB. Most under-applied stable pick in India.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab S</span><span class="rating-pill rate-high">WLB 9.5</span><span class="rating-pill rate-mid">Hard</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIER A -->
+    <div class="tier-block">
+      <div class="tier-header tier-a">
+        <div class="tier-badge tier-a">A</div>
+        <div class="tier-info">
+          <h4>Tier A — Strong Stability, High Pay, Some Volatility</h4>
+          <div class="desc">Done some layoffs but still net hiring. Excellent compensation. Higher ceiling than Tier S but a bit more uncertain.</div>
+        </div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini-card">
+          <div class="mname">NVIDIA India (your pick)</div>
+          <div class="mpay">IC2-IC3 · ₹50-85L</div>
+          <div class="mnote">Bangalore + Hyderabad. AI boom = currently hiring aggressively. NSU (NVIDIA Stock Unit) is rocket fuel for total comp.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab A</span><span class="rating-pill rate-mid">WLB 7</span><span class="rating-pill rate-mid">Hard</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Microsoft India</div>
+          <div class="mpay">SDE 2 (60-61) · ₹35-52L</div>
+          <div class="mnote">Bangalore + Hyderabad. Did 7% US layoffs but India hiring is steady. Azure + GitHub + Office = diversified moat.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab A</span><span class="rating-pill rate-mid">WLB 8</span><span class="rating-pill rate-mid">Hard</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Workday India</div>
+          <div class="mpay">SE 2 · ₹35-65L</div>
+          <div class="mnote">Pune + Bangalore. HR/Finance SaaS for enterprises. Sticky customers. Underrated WLB pick.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab A</span><span class="rating-pill rate-high">WLB 9</span><span class="rating-pill rate-high">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Salesforce India</div>
+          <div class="mpay">SMTS · ₹40-75L</div>
+          <div class="mnote">Bangalore + Hyderabad. CRM giant. Did some 2023 layoffs but recovered. Solid for senior SDE roles.</div>
+          <div class="ratings"><span class="rating-pill rate-mid">Stab A</span><span class="rating-pill rate-mid">WLB 8</span><span class="rating-pill rate-mid">Hard</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">ServiceNow India</div>
+          <div class="mpay">Sr SDE · ₹40-70L</div>
+          <div class="mnote">Hyderabad. Workflow automation for enterprises. High retention, growing fast.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab A</span><span class="rating-pill rate-high">WLB 8.5</span><span class="rating-pill rate-mid">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">VMware (now Broadcom)</div>
+          <div class="mpay">MTS 3 · ₹40-75L</div>
+          <div class="mnote">Bangalore. Some Broadcom-acquisition layoffs but core teams stable. Watch this space.</div>
+          <div class="ratings"><span class="rating-pill rate-mid">Stab A-</span><span class="rating-pill rate-mid">WLB 7</span><span class="rating-pill rate-mid">Hard</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIER B -->
+    <div class="tier-block">
+      <div class="tier-header tier-b">
+        <div class="tier-badge tier-b">B</div>
+        <div class="tier-info">
+          <h4>Tier B — High Comp, More Demanding, Higher Volatility</h4>
+          <div class="desc">Cutting-edge cos with great pay but higher pressure or layoff history. Apply but don't bet your career on tenure here.</div>
+        </div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini-card">
+          <div class="mname">Stripe (your pick)</div>
+          <div class="mpay">L2 · ₹70-130L</div>
+          <div class="mnote">Pre-IPO. Top-of-market pay. Some 2022 cuts. High bar, high reward. Bengaluru. Median India L2 ≈ ₹96L.</div>
+          <div class="ratings"><span class="rating-pill rate-mid">Stab B</span><span class="rating-pill rate-mid">WLB 6.5</span><span class="rating-pill rate-low">Extreme</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Datadog India</div>
+          <div class="mpay">SE 2 · ₹45-90L</div>
+          <div class="mnote">Bangalore. Observability/monitoring. Strong B2B SaaS. Growing fast. Demanding but fair.</div>
+          <div class="ratings"><span class="rating-pill rate-mid">Stab B+</span><span class="rating-pill rate-mid">WLB 7.5</span><span class="rating-pill rate-mid">Hard</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Confluent India</div>
+          <div class="mpay">SE 2 · ₹45-85L</div>
+          <div class="mnote">Bangalore. Kafka. Streaming infra. Profitable in 2024. Strong technical culture.</div>
+          <div class="ratings"><span class="rating-pill rate-mid">Stab B</span><span class="rating-pill rate-mid">WLB 7.5</span><span class="rating-pill rate-mid">Hard</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">MongoDB India</div>
+          <div class="mpay">SE 2 · ₹40-75L</div>
+          <div class="mnote">Gurgaon + Bangalore. Database SaaS. Steady growth. No major layoffs.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab B+</span><span class="rating-pill rate-mid">WLB 8</span><span class="rating-pill rate-mid">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Snowflake India</div>
+          <div class="mpay">SE 2 · ₹45-95L</div>
+          <div class="mnote">Pune. Data warehousing. Did some 2024 layoffs. Strong if you crack it.</div>
+          <div class="ratings"><span class="rating-pill rate-mid">Stab B</span><span class="rating-pill rate-mid">WLB 7</span><span class="rating-pill rate-mid">Hard</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Cloudflare India</div>
+          <div class="mpay">Sr SE · ₹35-70L</div>
+          <div class="mnote">Bangalore. CDN/security. Did some 2023 cuts. Still hiring globally. Cool tech.</div>
+          <div class="ratings"><span class="rating-pill rate-mid">Stab B</span><span class="rating-pill rate-mid">WLB 7.5</span><span class="rating-pill rate-mid">Hard</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Twilio India</div>
+          <div class="mpay">SE 2 · ₹35-65L</div>
+          <div class="mnote">Bangalore. Communications APIs. Did 2023 layoffs but core stable. Good for backend SDEs.</div>
+          <div class="ratings"><span class="rating-pill rate-mid">Stab B</span><span class="rating-pill rate-mid">WLB 7.5</span><span class="rating-pill rate-mid">Med</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIER C -->
+    <div class="tier-block">
+      <div class="tier-header tier-c">
+        <div class="tier-badge tier-c">C</div>
+        <div class="tier-info">
+          <h4>Tier C — Indian Profitable Product Companies</h4>
+          <div class="desc">Smaller offices, lower pay than US giants, but extremely stable because they're profitable. Easier to crack. Great long-term homes.</div>
+        </div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini-card">
+          <div class="mname">Zerodha</div>
+          <div class="mpay">Sr Dev · ₹30-55L</div>
+          <div class="mnote">Bangalore. Most profitable startup in India. Famously chill culture. Hires very selectively.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab S</span><span class="rating-pill rate-high">WLB 9.5</span><span class="rating-pill rate-mid">Hard</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">BrowserStack</div>
+          <div class="mpay">Sr SDE · ₹35-65L</div>
+          <div class="mnote">Mumbai + Dublin. Profitable for 10+ years. Cross-browser testing tools. Elite engineering culture.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab S</span><span class="rating-pill rate-high">WLB 9</span><span class="rating-pill rate-mid">Hard</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Postman</div>
+          <div class="mpay">SDE 2 · ₹35-65L</div>
+          <div class="mnote">Bangalore HQ. API tooling. Profitable, growing, no layoffs. Dev-first culture matches your skills.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab A+</span><span class="rating-pill rate-high">WLB 8.5</span><span class="rating-pill rate-mid">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Razorpay</div>
+          <div class="mpay">SDE 2 · ₹30-55L</div>
+          <div class="mnote">Bangalore. Payments fintech. Solid Indian unicorn. Some restructuring but core team stable.</div>
+          <div class="ratings"><span class="rating-pill rate-mid">Stab B+</span><span class="rating-pill rate-mid">WLB 7.5</span><span class="rating-pill rate-mid">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">PhonePe</div>
+          <div class="mpay">SDE 2 · ₹30-60L</div>
+          <div class="mnote">Bangalore. UPI payments giant. Backed by Walmart. Fintech is sticky. Solid product co.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab A</span><span class="rating-pill rate-mid">WLB 7.5</span><span class="rating-pill rate-mid">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Atlan</div>
+          <div class="mpay">SE 2 · ₹35-60L</div>
+          <div class="mnote">Bangalore. Data catalog SaaS. Series-C, growing well. Strong eng culture. Smaller team = high impact.</div>
+          <div class="ratings"><span class="rating-pill rate-mid">Stab B+</span><span class="rating-pill rate-high">WLB 8.5</span><span class="rating-pill rate-mid">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Hasura</div>
+          <div class="mpay">SE 2 · ₹30-55L</div>
+          <div class="mnote">Bangalore. GraphQL engine, dev tools. Smaller, slightly less stable than Postman. Good Go/Python fit.</div>
+          <div class="ratings"><span class="rating-pill rate-mid">Stab B</span><span class="rating-pill rate-high">WLB 8.5</span><span class="rating-pill rate-mid">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Hotstar (Disney+)</div>
+          <div class="mpay">SDE 2 · ₹30-55L</div>
+          <div class="mnote">Bangalore + Mumbai. Streaming infra. Disney-backed = stable. Cricket = traffic spikes = good systems work.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab A</span><span class="rating-pill rate-mid">WLB 7.5</span><span class="rating-pill rate-mid">Med</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIER D -->
+    <div class="tier-block">
+      <div class="tier-header tier-d">
+        <div class="tier-badge tier-d">D</div>
+        <div class="tier-info">
+          <h4>Tier D — GCCs of Stable Industries (Hidden Gems)</h4>
+          <div class="desc">Captive centers of banks, retailers, insurance — boring industries = no layoffs. Great WLB. Most under-applied tier in India.</div>
+        </div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini-card">
+          <div class="mname">Goldman Sachs Tech</div>
+          <div class="mpay">VP / Sr Eng · ₹40-75L</div>
+          <div class="mnote">Bangalore + Hyderabad. Huge tech org. Stable. Pays well. Banking = recession-resistant.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab A+</span><span class="rating-pill rate-mid">WLB 7</span><span class="rating-pill rate-mid">Hard</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">JPMorgan Chase Tech</div>
+          <div class="mpay">VP / SE 3 · ₹35-65L</div>
+          <div class="mnote">Bangalore + Hyderabad. Massive tech investment. Very stable. Bureaucratic but secure.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab S</span><span class="rating-pill rate-high">WLB 8</span><span class="rating-pill rate-high">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Wells Fargo Tech</div>
+          <div class="mpay">Sr SE · ₹30-55L</div>
+          <div class="mnote">Bangalore + Hyderabad. Banking GCC. 9-to-5, never overworked. Pure stability play.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab S</span><span class="rating-pill rate-high">WLB 9</span><span class="rating-pill rate-high">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Visa Tech</div>
+          <div class="mpay">Sr SE · ₹35-65L</div>
+          <div class="mnote">Bangalore. Payments rails = recession-proof. Solid pay. Underrated stability pick.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab S</span><span class="rating-pill rate-high">WLB 8.5</span><span class="rating-pill rate-mid">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Mastercard Tech</div>
+          <div class="mpay">Sr SE · ₹35-65L</div>
+          <div class="mnote">Pune + Vadodara. Same dynamics as Visa. Stable, well-paid. Hiring for cloud + Go.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab S</span><span class="rating-pill rate-high">WLB 8.5</span><span class="rating-pill rate-mid">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Walmart Global Tech</div>
+          <div class="mpay">SDE 3 · ₹40-70L</div>
+          <div class="mnote">Bangalore. Owns Flipkart + PhonePe network. Massive scale work. Strong WLB.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab A+</span><span class="rating-pill rate-high">WLB 8.5</span><span class="rating-pill rate-mid">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Target Tech India</div>
+          <div class="mpay">Sr Eng · ₹30-55L</div>
+          <div class="mnote">Bangalore. Retail GCC. Famously chill culture. 9-to-5. Underrated.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab S</span><span class="rating-pill rate-high">WLB 9.5</span><span class="rating-pill rate-high">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">Lowe's India</div>
+          <div class="mpay">Sr Eng · ₹30-50L</div>
+          <div class="mnote">Bangalore. Retail tech. Calm, sustainable, family-friendly. Lower pay = trade-off for WLB.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab S</span><span class="rating-pill rate-high">WLB 9.5</span><span class="rating-pill rate-high">Med</span></div>
+        </div>
+        <div class="mini-card">
+          <div class="mname">American Express Tech</div>
+          <div class="mpay">Sr Eng · ₹30-60L</div>
+          <div class="mnote">Gurgaon + Bangalore. Premium financial services. Stable, predictable, good benefits.</div>
+          <div class="ratings"><span class="rating-pill rate-high">Stab A+</span><span class="rating-pill rate-high">WLB 8.5</span><span class="rating-pill rate-mid">Med</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px; padding:18px 22px; background:linear-gradient(135deg, rgba(16,185,129,0.06), rgba(6,182,212,0.04)); border-radius:12px; border:1px solid rgba(16,185,129,0.2); font-size:13.5px; color:var(--text-mid); line-height:1.65;">
+      <strong style="color:var(--green); display:block; margin-bottom:6px;">📌 Application Strategy for 5–10 Year Tenure</strong>
+      <strong>Apply broadly within Tier S + Tier D first</strong> (these are your home-for-a-decade picks). <strong>Tier A + Tier C as upside</strong> (great pay, mostly stable). <strong>Tier B as stretch</strong> (highest comp, but plan for 3–5 yr stays). Aim for 30–40 applications across all tiers. With your timeline, expect to interview at 8–12 places and get 2–4 offers. Pick based on team + manager + culture, not just comp.
+    </div>
+  </section>
+
+  <!-- RESOURCES -->
+  <section class="section">
+    <div class="section-eyebrow">Resources</div>
+    <h2 class="section-title">What to Use, Buy, and Skip</h2>
+    <p class="section-desc">Educative Pro is excellent — you already have the most important DSA + System Design content. Below is what's worth adding, and what to skip.</p>
+
+    <div class="resource-block have">
+      <h3>✓ You Already Have — Use These First</h3>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Grokking the Coding Interview Patterns <span class="priority-tag priority-must">Must Use</span></div>
+          <div class="why">THE pattern-based DSA course. 16 patterns covering ~95% of interview questions. Start here, do every problem.</div>
+        </div>
+        <div class="price green">Educative</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Grokking the System Design Interview <span class="priority-tag priority-must">Must Use</span></div>
+          <div class="why">Original system design bible. Covers ~16 designs (URL shortener, Twitter, Instagram, Uber, etc.).</div>
+        </div>
+        <div class="price green">Educative + PDF</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Grokking the Modern System Design Interview <span class="priority-tag priority-strong">Strong Use</span></div>
+          <div class="why">2026-updated version with newer designs (TikTok, WhatsApp, Distributed Cache). Use after the original.</div>
+        </div>
+        <div class="price green">Educative</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Grokking the Advanced System Design Interview <span class="priority-tag priority-strong">Strong Use</span></div>
+          <div class="why">Deep-dives into Dynamo, Kafka, Chubby, GFS, BigTable — exactly what Stripe/NVIDIA probe in SD rounds.</div>
+        </div>
+        <div class="price green">In Your Repo</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Grokking Dynamic Programming Patterns <span class="priority-tag priority-strong">Strong Use</span></div>
+          <div class="why">DP is the hardest topic. This course makes it pattern-based and approachable.</div>
+        </div>
+        <div class="price green">Educative</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Grokking the Behavioral Interview <span class="priority-tag priority-strong">Strong Use</span></div>
+          <div class="why">Use in Phase 5 to prep STAR stories — especially important for Atlassian's values round.</div>
+        </div>
+        <div class="price green">Educative</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Grokking OOP Design Interview <span class="priority-tag priority-strong">Strong Use</span></div>
+          <div class="why">28 case studies — Amazon, LinkedIn, parking lot, chess. Covers UML + class/sequence diagrams. Use for LLD rounds.</div>
+        </div>
+        <div class="price green">In Your Repo</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Designing Data-Intensive Applications (DDIA) <span class="priority-tag priority-must">Must Read</span></div>
+          <div class="why">THE bible for backend SDEs. Chapters 1-9 are gold for SD interviews — replication, partitioning, transactions, consistency. You have the PDF — read it.</div>
+        </div>
+        <div class="price green">PDF Owned</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">System Design Interview — Alex Xu (Vol 1) <span class="priority-tag priority-must">Must Read</span></div>
+          <div class="why">The most recommended SD interview book. Clear framework for approaching any design question. Covers 13 classic designs.</div>
+        </div>
+        <div class="price green">PDF Owned</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Database Internals <span class="priority-tag priority-nice">Reference</span></div>
+          <div class="why">Deep dive into B-trees, LSM trees, distributed consensus. Read Ch 1-4 for storage engine knowledge — gives edge in NVIDIA/Stripe deep-dives.</div>
+        </div>
+        <div class="price green">PDF Owned</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Google SRE Workbook <span class="priority-tag priority-nice">Reference</span></div>
+          <div class="why">SLOs, incident management, monitoring. Great for "how would you monitor this?" follow-ups in SD rounds. Skim chapters 2, 4, 5.</div>
+        </div>
+        <div class="price green">PDF Owned</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Coding Interview Patterns (16 folders) <span class="priority-tag priority-strong">Strong Use</span></div>
+          <div class="why">Your repo has structured folders for all 16 patterns — Sliding Window, Two Pointers, BFS, DFS, Topological Sort, Knapsack, etc. Use as revision reference.</div>
+        </div>
+        <div class="price green">In Your Repo</div>
+      </div>
+    </div>
+
+    <div class="resource-block buy">
+      <h3>↓ Worth Buying — In This Order</h3>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">LeetCode Premium <span class="priority-tag priority-must">Buy in Week 13</span></div>
+          <div class="why">Company-tagged questions are the real value — Stripe, Atlassian, NVIDIA, Akamai filters. See what was asked in last 6 months. Buy 3 months when you start applying. Don't buy now.</div>
+        </div>
+        <div class="price amber">~$35/mo<br><span style="font-size:10px;color:var(--text-dim)">≈₹2,900/mo</span></div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">NeetCode Pro <span class="priority-tag priority-strong">Optional — Free YT is enough</span></div>
+          <div class="why">Pro gives structured roadmap + progress tracking. But the free YouTube channel covers 90% of NeetCode 150. Buy ONLY if you want the structured UI and extra problems.</div>
+        </div>
+        <div class="price amber">~$149/yr<br><span style="font-size:10px;color:var(--text-dim)">≈₹12,500</span></div>
+      </div>
+    </div>
+
+    <div class="resource-block free">
+      <h3>★ Free Resources — Use Heavily</h3>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">NeetCode YouTube <span class="priority-tag priority-must">Must Use</span></div>
+          <div class="why">Best DSA video explanations on the internet. NeetCode 150 walkthroughs are free. This + LeetCode + your Educative = complete DSA prep. No need to buy NeetCode Pro if budget is tight.</div>
+        </div>
+        <div class="price green">Free</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Hello Interview YouTube <span class="priority-tag priority-must">Must Use</span></div>
+          <div class="why">Best system design mock interviews on YouTube. Watch real 45-min designs by ex-Meta/Google engineers. Pair with your DDIA + Alex Xu books.</div>
+        </div>
+        <div class="price green">Free</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">System Design Primer (GitHub) <span class="priority-tag priority-strong">Strong Use</span></div>
+          <div class="why">github.com/donnemartin/system-design-primer — comprehensive open-source reference. Great for quick revision of concepts before interviews.</div>
+        </div>
+        <div class="price green">Free</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">ByteByteGo YouTube <span class="priority-tag priority-strong">Strong Use</span></div>
+          <div class="why">Alex Xu's YouTube has the best animated SD explanations for free. You already own his book — the videos complement it perfectly. Skip the paid newsletter.</div>
+        </div>
+        <div class="price green">Free</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Striver's SDE Sheet + YouTube <span class="priority-tag priority-strong">Strong Use</span></div>
+          <div class="why">450 problems mapped to patterns with video solutions. Great Indian instructor. Use as alternative to NeetCode 150 or for extra problems on weak topics.</div>
+        </div>
+        <div class="price green">Free</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Tech Interview Handbook <span class="priority-tag priority-strong">Strong Use</span></div>
+          <div class="why">techinterviewhandbook.org — best free resource for resume templates, behavioral prep, and salary negotiation tactics.</div>
+        </div>
+        <div class="price green">Free</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Pramp / Interviewing.io <span class="priority-tag priority-strong">Strong Use</span></div>
+          <div class="why">Free peer mock interviews. Use 2-3x per week from Week 13 onward. Real-time practice > solo grind.</div>
+        </div>
+        <div class="price green">Free</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Aditya Verma YouTube (Recursion + DP)</div>
+          <div class="why">Best free recursion/DP playlist in Hindi-English. If DP clicks with his teaching style, stick with it.</div>
+        </div>
+        <div class="price green">Free</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Engineering Blogs (Netflix, Airbnb, Uber, Stripe)</div>
+          <div class="why">Read 1-2 posts/week during SD phase. Real architecture decisions > textbook theory. Referenced in your repo's README.</div>
+        </div>
+        <div class="price green">Free</div>
+      </div>
+    </div>
+
+    <div class="resource-block skip">
+      <h3>✗ Skip These — Waste of Money</h3>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">ByteByteGo Paid Newsletter</div>
+          <div class="why">You own Alex Xu's book + free YouTube covers the best content. The paid newsletter is nice-to-have, not must-have. Save ₹4,500.</div>
+        </div>
+        <div class="price rose">Skip · ₹4,500 saved</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">AlgoExpert / DataExpert</div>
+          <div class="why">Educative Grokking + NeetCode covers everything AlgoExpert offers, often better. ~$99 you don't need to spend.</div>
+        </div>
+        <div class="price rose">Skip · ₹8,300 saved</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">Coursera Plus / Udemy DSA courses</div>
+          <div class="why">Wrong format for SDE interview prep. Academic style, slow pace. You have better resources already.</div>
+        </div>
+        <div class="price rose">Skip</div>
+      </div>
+      <div class="resource-item">
+        <div class="info">
+          <div class="title">"Crack X interview" guides under ₹500</div>
+          <div class="why">Mostly recycled content from the free resources you already have. Stick to original sources.</div>
+        </div>
+        <div class="price rose">Skip</div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px; padding:18px 22px; background:linear-gradient(135deg, rgba(16,185,129,0.05), rgba(245,158,11,0.03)); border-radius:12px; border:1px solid rgba(245,158,11,0.2); font-size:13px; color:var(--text-mid);">
+      <strong style="color:var(--green)">You already own 90% of what you need.</strong> Your SystemDesign repo + Educative Pro covers DSA, system design, OOP design, behavioral, and all the key books. <strong style="color:var(--amber)">Only must-buy: LeetCode Premium (₹8,700 for 3 months)</strong> for company-tagged questions when you start applying in Week 13. Optional: NeetCode Pro (₹12,500/yr) if you prefer structured UI over free YouTube. <strong>Total: ₹8,700 – ₹21,200 max.</strong> Compare to a ₹40L+ hike.
+    </div>
+  </section>
+
+  <!-- THE ROADMAP -->
+  <section class="section">
+    <div class="section-eyebrow">The Roadmap</div>
+    <h2 class="section-title">21 Weeks · May 6 → October 2026</h2>
+    <p class="section-desc">Click any phase to expand. All boxes save your progress automatically.</p>
+
+    <!-- PHASE 0 -->
+    <div class="phase p0 open" onclick="this.classList.toggle('open')">
+      <div class="phase-head">
+        <span class="phase-num">Phase 0</span>
+        <h3>Reset & Foundations</h3>
+        <span class="phase-meta">Week 1 · ~25 hrs</span>
+        <span class="phase-toggle">▼</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-content">
+          <div class="phase-why">
+            <strong>Why this matters:</strong> You said you've forgotten DSA and basics. Don't pretend otherwise — start from zero. One focused week of fundamentals saves you from struggling for months.
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 1 — Programming Fundamentals + Tooling</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,0)"></span><div class="task-body"><div class="main">Pick ONE language for interviews — recommend <strong>Python</strong> (faster to write, better for whiteboard). Go for system design discussions later.</div><div class="resource">▶ Educative — "Learn Python 3 from Scratch" (~6 hrs, skim what you know)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,1)"></span><div class="task-body"><div class="main">Refresh Python core: list/dict/set operations, comprehensions, f-strings, OOP, enumerate/zip, lambda, defaultdict, Counter</div><div class="resource">▶ Educative — "Ace the Python Coding Interview" (focus on Chapters 1-4)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,2)"></span><div class="task-body"><div class="main">Big-O notation — understand time and space complexity intuitively. Know: O(1), O(log n), O(n), O(n log n), O(n²)</div><div class="resource">▶ NeetCode YouTube — "Big-O Notation - For Coding Interviews"<br>▶ Educative — "Data Structures for Coding Interviews in Python" (Ch 1: Complexity)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,3)"></span><div class="task-body"><div class="main">Built-in data structures deep-dive: list, dict, set, tuple, deque (collections), heapq, bisect — know every operation's time complexity</div><div class="resource">▶ Educative — "Data Structures for Coding Interviews in Python" (Chapters 2-7)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,4)"></span><div class="task-body"><div class="main">Sorting algorithms refresh: Python's sorted() + sort() internals (Timsort), when to use custom key functions</div><div class="resource">▶ Educative — "Data Structures for Coding Interviews in Python" (Ch 8: Sorting)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,5)"></span><div class="task-body"><div class="main">Setup: Create LeetCode account, GitHub repo for solutions (push daily), Notion/Obsidian for pattern notes <span class="tag tag-key">Setup</span></div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,6)"></span><div class="task-body"><div class="main">Setup: Update LinkedIn headline — "Software Engineer | 4 YOE | Python · Go · Distributed Systems · AWS/GCP/Azure"</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,7)"></span><div class="task-body"><div class="main">Solve 10 warm-up problems — LC #1 Two Sum, #217 Contains Duplicate, #242 Valid Anagram, #49 Group Anagrams, #347 Top K Frequent, #238 Product Except Self, #36 Valid Sudoku, #128 Longest Consecutive, #271 Encode/Decode, #1 Two Sum variants</div><div class="resource">▶ NeetCode YouTube — "Arrays & Hashing" playlist (free)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,8)"></span><div class="task-body"><div class="main">Create your "Patterns Template" doc — for every pattern you learn, write the template code you can recall in 30 seconds <span class="tag tag-key">Critical Habit — Build From Day 1</span></div></div></div>
+          </div>
+
+          <div class="output">
+            <h5>✓ End of Week 1</h5>
+            <p>Python is fluent again · Tooling ready · LeetCode profile created · 10 problems solved · Patterns doc started · Mentally committed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 1 -->
+    <div class="phase p1" onclick="this.classList.toggle('open')">
+      <div class="phase-head">
+        <span class="phase-num">Phase 1</span>
+        <h3>DSA Foundations</h3>
+        <span class="phase-meta">Weeks 2–5 · ~100 hrs · 90 problems</span>
+        <span class="phase-toggle">▼</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-content">
+          <div class="phase-why">
+            <strong>The bedrock.</strong> 60-70% of interview questions come from these patterns. Master these and everything else clicks. Primary source: <strong>Grokking the Coding Interview: Patterns for Coding Questions</strong> (Educative) + NeetCode 150 (YouTube).
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 2 — Arrays, Strings, Hashmaps</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,9)"></span><div class="task-body"><div class="main">Pattern: Hash maps for O(1) lookup — "Two Sum" family, frequency counting, grouping</div><div class="resource">▶ Educative — Grokking Coding Interview: "Pattern: Hash Maps" module<br>▶ NeetCode YT — "Arrays & Hashing" playlist</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,10)"></span><div class="task-body"><div class="main">Pattern: Prefix sums for range queries — running totals, subarray sums</div><div class="resource">▶ Educative — Grokking Coding Interview: "Prefix Sum" section</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,11)"></span><div class="task-body"><div class="main">String manipulation: anagrams, palindromes, character frequency, substring problems</div><div class="resource">▶ Educative — "Data Structures for Coding Interviews in Python" (Ch: Strings)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,12)"></span><div class="task-body"><div class="main">Solve 20 problems: LC #1 Two Sum, #49 Group Anagrams, #347 Top K Frequent Elements, #238 Product of Array Except Self, #36 Valid Sudoku, #128 Longest Consecutive Sequence, #242 Valid Anagram, #125 Valid Palindrome, #3 Longest Substring Without Repeating Chars, #424 Longest Repeating Character Replacement, #20 Valid Parentheses, #155 Min Stack, #150 Evaluate Reverse Polish, #22 Generate Parentheses, #739 Daily Temperatures, #853 Car Fleet, #84 Largest Rectangle in Histogram, #560 Subarray Sum Equals K, #271 Encode & Decode Strings, #387 First Unique Character</div><div class="resource">▶ NeetCode YT — watch solution video AFTER attempting each for 25 min</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,13)"></span><div class="task-body"><div class="main">Update patterns doc: write hash map template, prefix sum template, string tricks <span class="tag tag-key">Habit</span></div></div></div>
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 3 — Two Pointers + Sliding Window</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,14)"></span><div class="task-body"><div class="main">Pattern: Two Pointers — pair-finding on sorted arrays, palindrome checking, container problems</div><div class="resource">▶ Educative — Grokking Coding Interview: "Pattern: Two Pointers" (full module)<br>▶ Your Repo — Coding Interview/02 Two Pointers folder</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,15)"></span><div class="task-body"><div class="main">Pattern: Sliding Window — fixed-size windows, variable-size (shrinking/expanding), optimal subarray/substring</div><div class="resource">▶ Educative — Grokking Coding Interview: "Pattern: Sliding Window" (full module)<br>▶ Your Repo — Coding Interview/01 Sliding Window folder<br>▶ NeetCode YT — "Sliding Window" playlist</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,16)"></span><div class="task-body"><div class="main">Solve 22 problems: LC #125 Valid Palindrome, #167 Two Sum II, #15 3Sum, #11 Container With Most Water, #42 Trapping Rain Water, #283 Move Zeroes, #26 Remove Duplicates, #344 Reverse String, #977 Squares of Sorted Array, #75 Sort Colors, #121 Best Time Buy/Sell Stock, #3 Longest Substring Without Repeating, #424 Longest Repeating Char Replacement, #76 Minimum Window Substring, #567 Permutation in String, #209 Min Size Subarray Sum, #438 Find All Anagrams, #904 Fruit Into Baskets, #30 Substring with Concatenation, #239 Sliding Window Maximum, #713 Subarray Product Less Than K, #395 Longest Substring At Least K Repeating</div><div class="resource">▶ NeetCode YT — "Two Pointers" + "Sliding Window" playlists</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,17)"></span><div class="task-body"><div class="main">Watch: Hello Interview YT — "How to identify the right pattern" video</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,18)"></span><div class="task-body"><div class="main">Update patterns doc: two-pointer template (same-direction, opposite-direction), sliding window template (fixed, variable) <span class="tag tag-key">Habit</span></div></div></div>
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 4 — Stacks, Queues, Monotonic Patterns</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,19)"></span><div class="task-body"><div class="main">Stack fundamentals: LIFO, parentheses matching, expression evaluation, undo operations</div><div class="resource">▶ Educative — "Data Structures for Coding Interviews in Python" (Ch: Stacks & Queues)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,20)"></span><div class="task-body"><div class="main">Pattern: Monotonic Stack — next greater/smaller element, histogram problems, stock span</div><div class="resource">▶ Educative — Grokking Coding Interview: "Monotonic Stack" module<br>▶ NeetCode YT — "Stack" playlist</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,21)"></span><div class="task-body"><div class="main">Queue patterns: BFS foundation, deque for sliding window, priority queue basics</div><div class="resource">▶ Educative — "Data Structures for Coding Interviews in Python" (Ch: Queues)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,22)"></span><div class="task-body"><div class="main">Solve 18 problems: LC #20 Valid Parentheses, #155 Min Stack, #150 Evaluate Reverse Polish Notation, #22 Generate Parentheses, #739 Daily Temperatures, #853 Car Fleet, #84 Largest Rectangle in Histogram, #71 Simplify Path, #394 Decode String, #496 Next Greater Element I, #503 Next Greater Element II, #901 Online Stock Span, #232 Implement Queue using Stacks, #225 Implement Stack using Queues, #946 Validate Stack Sequences, #735 Asteroid Collision, #402 Remove K Digits, #316 Remove Duplicate Letters</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,23)"></span><div class="task-body"><div class="main">Update patterns doc: stack template, monotonic stack template, when to use stack vs queue <span class="tag tag-key">Habit</span></div></div></div>
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 5 — Binary Search Mastery</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,24)"></span><div class="task-body"><div class="main">Pattern: Binary Search — classic, search-insert-position, rotated arrays, search a 2D matrix, search on answer</div><div class="resource">▶ Educative — Grokking Coding Interview: "Pattern: Modified Binary Search" (full module)<br>▶ Your Repo — Coding Interview/11 Modified Binary Search folder<br>▶ NeetCode YT — "Binary Search" playlist</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,25)"></span><div class="task-body"><div class="main">Advanced BS: binary search on answer (min of max, max of min), Koko eating bananas, capacity to ship packages</div><div class="resource">▶ Educative — Grokking Coding Interview: "Binary Search on Answer" section</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,26)"></span><div class="task-body"><div class="main">Solve 20 problems: LC #704 Binary Search, #35 Search Insert Position, #74 Search a 2D Matrix, #875 Koko Eating Bananas, #153 Find Minimum in Rotated Sorted Array, #33 Search in Rotated Sorted Array, #981 Time Based Key-Value Store, #4 Median of Two Sorted Arrays, #34 First and Last Position, #69 Sqrt(x), #162 Find Peak Element, #240 Search a 2D Matrix II, #1011 Capacity to Ship Packages, #410 Split Array Largest Sum, #378 Kth Smallest in Sorted Matrix, #287 Find the Duplicate Number, #658 Find K Closest Elements, #540 Single Element in Sorted Array, #668 Kth Smallest Number in Multiplication Table, #354 Russian Doll Envelopes</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,27)"></span><div class="task-body"><div class="main">Weekly retro: redo 5 hardest problems from Weeks 2-4 from scratch, no peeking <span class="tag tag-key">Habit</span></div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,28)"></span><div class="task-body"><div class="main">Update patterns doc: binary search template (left/right inclusive vs exclusive), BS on answer template <span class="tag tag-key">Habit</span></div></div></div>
+          </div>
+
+          <div class="output">
+            <h5>✓ End of Phase 1</h5>
+            <p>90 problems solved · 7 core patterns memorized (hash map, prefix sum, two pointers, sliding window, stack, monotonic stack, binary search) · Templates documented · Confidence rebuilt.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase p2" onclick="this.classList.toggle('open')">
+      <div class="phase-head">
+        <span class="phase-num">Phase 2</span>
+        <h3>DSA Core — Linked Lists, Trees, Graphs</h3>
+        <span class="phase-meta">Weeks 6–9 · ~100 hrs · 110 problems</span>
+        <span class="phase-toggle">▼</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-content">
+          <div class="phase-why">
+            <strong>The "real" DSA.</strong> Most candidates get filtered out here. Trees and graphs are heavily tested at all your target companies. Primary: <strong>Grokking Coding Interview</strong> (Educative) for patterns + NeetCode YT for visual explanations. Don't skim — really understand recursion intuitively.
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 6 — Linked Lists + Fast/Slow Pointers</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,29)"></span><div class="task-body"><div class="main">Pattern: In-Place Linked List Reversal — reverse full list, reverse sublist, reverse in k-groups</div><div class="resource">▶ Educative — Grokking Coding Interview: "Pattern: In-Place Reversal of a LinkedList"<br>▶ Your Repo — Coding Interview/06 In-Place Reversal folder</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,30)"></span><div class="task-body"><div class="main">Pattern: Fast & Slow Pointers — cycle detection (Floyd's), middle of list, palindrome linked list, happy number</div><div class="resource">▶ Educative — Grokking Coding Interview: "Pattern: Fast & Slow Pointers"<br>▶ Your Repo — Coding Interview/03 Fast and Slow Pointers folder</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,31)"></span><div class="task-body"><div class="main">Recursion fundamentals — base case, recursive case, call stack, recursion tree visualization</div><div class="resource">▶ Aditya Verma YT — "Recursion Playlist" (best free explanation, watch first 10 videos)<br>▶ Educative — "Recursion for Coding Interviews in Python"</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,32)"></span><div class="task-body"><div class="main">Solve 22 problems: LC #206 Reverse Linked List, #21 Merge Two Sorted Lists, #143 Reorder List, #19 Remove Nth Node from End, #138 Copy List with Random Pointer, #2 Add Two Numbers, #141 Linked List Cycle, #142 Linked List Cycle II, #287 Find Duplicate Number, #23 Merge K Sorted Lists, #25 Reverse Nodes in K-Group, #148 Sort List, #160 Intersection of Two Lists, #234 Palindrome Linked List, #876 Middle of Linked List, #328 Odd Even Linked List, #86 Partition List, #61 Rotate List, #203 Remove Linked List Elements, #83 Remove Duplicates from Sorted List, #82 Remove Duplicates II, #24 Swap Nodes in Pairs</div><div class="resource">▶ NeetCode YT — "Linked List" playlist</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,33)"></span><div class="task-body"><div class="main">Update patterns doc: linked list reversal template, fast/slow pointer template, recursion base patterns <span class="tag tag-key">Habit</span></div></div></div>
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 7 — Trees (Binary Trees + BSTs)</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,34)"></span><div class="task-body"><div class="main">Tree traversals: DFS (preorder/inorder/postorder) — recursive AND iterative. BFS (level-order) using queue.</div><div class="resource">▶ Educative — Grokking Coding Interview: "Pattern: Tree BFS" + "Pattern: Tree DFS"<br>▶ Educative — "Data Structures for Coding Interviews in Python" (Ch: Trees)<br>▶ Your Repo — Coding Interview/07 BFS + 08 DFS folders</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,35)"></span><div class="task-body"><div class="main">BST operations: insert, delete, search, validate BST, lowest common ancestor, inorder = sorted</div><div class="resource">▶ Educative — Grokking Coding Interview: BST sections<br>▶ NeetCode YT — "Trees" playlist (all videos)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,36)"></span><div class="task-body"><div class="main">Tree DP patterns: max depth, diameter, max path sum, balanced tree check — all use bottom-up returns</div><div class="resource">▶ Abdul Bari YT — "Tree algorithms" videos</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,37)"></span><div class="task-body"><div class="main">Solve 25 problems: LC #226 Invert Binary Tree, #104 Max Depth, #543 Diameter of Binary Tree, #110 Balanced Binary Tree, #100 Same Tree, #572 Subtree of Another Tree, #235 LCA of BST, #236 LCA of Binary Tree, #102 Level Order Traversal, #199 Right Side View, #1448 Count Good Nodes, #98 Validate BST, #230 Kth Smallest in BST, #105 Construct Tree from Preorder+Inorder, #124 Max Path Sum, #297 Serialize/Deserialize, #116 Populating Next Right Pointers, #114 Flatten Binary Tree, #437 Path Sum III, #662 Max Width of Binary Tree, #863 Nodes at Distance K, #987 Vertical Order Traversal, #515 Find Largest Value Each Row, #1161 Max Level Sum, #103 Zigzag Level Order</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,38)"></span><div class="task-body"><div class="main">Update patterns doc: DFS template (recursive + iterative), BFS template, BST tricks <span class="tag tag-key">Habit</span></div></div></div>
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 8 — Graphs (Most Important Week)</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,39)"></span><div class="task-body"><div class="main">Graph fundamentals: adjacency list vs matrix, directed vs undirected, weighted edges, building graphs from input</div><div class="resource">▶ Educative — "Graph Algorithms for Technical Interviews" (Educative)<br>▶ William Fiset YT — "Graph Theory Playlist" (best visualization of graph algos)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,40)"></span><div class="task-body"><div class="main">BFS + DFS on graphs — shortest path (unweighted), connected components, cycle detection, island problems <span class="tag tag-target">Stripe Loves This</span></div><div class="resource">▶ Educative — Grokking Coding Interview: "Pattern: Graph BFS/DFS" sections<br>▶ NeetCode YT — "Graphs" playlist</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,41)"></span><div class="task-body"><div class="main">Pattern: Topological Sort — course schedule, build order, alien dictionary. BFS (Kahn's) + DFS approaches.</div><div class="resource">▶ Educative — Grokking Coding Interview: "Pattern: Topological Sort"<br>▶ Your Repo — Coding Interview/16 Topological Sort folder</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,42)"></span><div class="task-body"><div class="main">Union-Find (Disjoint Set Union): path compression, union by rank. For connected components + MST.</div><div class="resource">▶ NeetCode YT — "Union Find" explanation<br>▶ William Fiset YT — "Union Find / Disjoint Set"</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,43)"></span><div class="task-body"><div class="main">Shortest path algorithms: Dijkstra's (weighted, no negative), Bellman-Ford (negative edges). Know when to use which.</div><div class="resource">▶ Educative — "Graph Algorithms for Technical Interviews" (Shortest Paths chapter)<br>▶ Abdul Bari YT — "Dijkstra's Algorithm" + "Bellman-Ford"</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,44)"></span><div class="task-body"><div class="main">Solve 28 problems: LC #200 Number of Islands, #133 Clone Graph, #695 Max Area of Island, #417 Pacific Atlantic Water Flow, #130 Surrounded Regions, #994 Rotting Oranges, #207 Course Schedule, #210 Course Schedule II, #684 Redundant Connection, #323 Number of Connected Components, #127 Word Ladder, #286 Walls and Gates, #261 Graph Valid Tree, #743 Network Delay Time, #787 Cheapest Flights Within K Stops, #332 Reconstruct Itinerary, #1584 Min Cost to Connect All Points, #269 Alien Dictionary, #778 Swim in Rising Water, #547 Number of Provinces, #841 Keys and Rooms, #1091 Shortest Path Binary Matrix, #909 Snakes and Ladders, #752 Open the Lock, #399 Evaluate Division, #1319 Number of Operations, #785 Is Graph Bipartite, #126 Word Ladder II</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,45)"></span><div class="task-body"><div class="main">Update patterns doc: graph BFS/DFS templates, topological sort (Kahn's), Union-Find template, Dijkstra template <span class="tag tag-key">Habit</span></div></div></div>
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 9 — Heaps, Tries, Backtracking</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,46)"></span><div class="task-body"><div class="main">Pattern: Top K Elements — using heapq (min-heap), K largest/smallest, K closest, frequency sort</div><div class="resource">▶ Educative — Grokking Coding Interview: "Pattern: Top 'K' Elements"<br>▶ Your Repo — Coding Interview/12 Top K Elements folder</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,47)"></span><div class="task-body"><div class="main">Pattern: Two Heaps — find median in stream, maximize capital, sliding window median</div><div class="resource">▶ Educative — Grokking Coding Interview: "Pattern: Two Heaps"<br>▶ Your Repo — Coding Interview/09 Two Heaps folder</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,48)"></span><div class="task-body"><div class="main">Pattern: K-Way Merge — merge K sorted lists/arrays, smallest number range</div><div class="resource">▶ Educative — Grokking Coding Interview: "Pattern: K-Way Merge"<br>▶ Your Repo — Coding Interview/13 K-Way Merge folder</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,49)"></span><div class="task-body"><div class="main">Tries: implement from scratch, word search, autocomplete, prefix matching</div><div class="resource">▶ NeetCode YT — "Trie" playlist<br>▶ Educative — "Data Structures for Coding Interviews in Python" (Ch: Trie)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,50)"></span><div class="task-body"><div class="main">Pattern: Subsets / Backtracking — subsets, permutations, combinations, N-Queens, word search, Sudoku solver</div><div class="resource">▶ Educative — Grokking Coding Interview: "Pattern: Subsets"<br>▶ Your Repo — Coding Interview/10 Subsets folder<br>▶ NeetCode YT — "Backtracking" playlist</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,51)"></span><div class="task-body"><div class="main">Solve 30 problems: LC #215 Kth Largest Element, #347 Top K Frequent, #355 Design Twitter, #295 Find Median from Data Stream, #480 Sliding Window Median, #373 Find K Pairs with Smallest Sums, #23 Merge K Sorted Lists, #378 Kth Smallest in Sorted Matrix, #208 Implement Trie, #211 Design Add and Search Words, #212 Word Search II, #14 Longest Common Prefix, #78 Subsets, #90 Subsets II, #46 Permutations, #47 Permutations II, #39 Combination Sum, #40 Combination Sum II, #77 Combinations, #79 Word Search, #51 N-Queens, #37 Sudoku Solver, #131 Palindrome Partitioning, #17 Letter Combinations of Phone Number, #93 Restore IP Addresses, #22 Generate Parentheses, #332 Reconstruct Itinerary, #1239 Max Length of Concatenated String, #1980 Find Unique Binary String, #473 Matchsticks to Square</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,52)"></span><div class="task-body"><div class="main">Mid-roadmap mock interview: Pramp or interviewing.io — test your tree/graph skills under pressure <span class="tag tag-mock">Mock #1</span></div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,53)"></span><div class="task-body"><div class="main">Update patterns doc: heap template, trie template, backtracking template, K-way merge template <span class="tag tag-key">Habit</span></div></div></div>
+          </div>
+
+          <div class="output">
+            <h5>✓ End of Phase 2</h5>
+            <p>195 total problems · Trees, graphs, heaps, tries, backtracking mastered · First mock interview done · You can now solve LC Medium problems consistently in 25 min.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase p3" onclick="this.classList.toggle('open')">
+      <div class="phase-head">
+        <span class="phase-num">Phase 3</span>
+        <h3>DSA Advanced — DP, Greedy, Intervals, Bit Manipulation</h3>
+        <span class="phase-meta">Weeks 10–12 · ~75 hrs · 80 problems</span>
+        <span class="phase-toggle">▼</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-content">
+          <div class="phase-why">
+            <strong>Where Stripe and NVIDIA distinguish themselves.</strong> DP is hard but critical — use <strong>Grokking Dynamic Programming Patterns</strong> (Educative) to make it tractable. Don't memorize solutions — understand the state transition. Also covers intervals (Atlassian favorite) and bit manipulation (NVIDIA favorite).
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 10 — Dynamic Programming: 1D + 2D</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,54)"></span><div class="task-body"><div class="main">DP fundamentals: memoization vs tabulation, identifying overlapping subproblems, optimal substructure</div><div class="resource">▶ Educative — "Grokking Dynamic Programming Patterns for Coding Interviews" (start from beginning)<br>▶ Your Repo — Coding Interview/17 0-1 Knapsack folder<br>▶ Aditya Verma YT — "Dynamic Programming Playlist" (first 15 videos)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,55)"></span><div class="task-body"><div class="main">1D DP patterns: Fibonacci, climbing stairs, house robber, decode ways, coin change, longest increasing subsequence</div><div class="resource">▶ Educative — Grokking DP: "Fibonacci Numbers" + "Palindromic Subsequence" patterns<br>▶ NeetCode YT — "1-D Dynamic Programming" playlist</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,56)"></span><div class="task-body"><div class="main">2D DP: longest common subsequence, edit distance, unique paths, minimum path sum, interleaving string</div><div class="resource">▶ Educative — Grokking DP: "Longest Common Substring" pattern<br>▶ NeetCode YT — "2-D Dynamic Programming" playlist</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,57)"></span><div class="task-body"><div class="main">Solve 25 problems: LC #70 Climbing Stairs, #198 House Robber, #213 House Robber II, #5 Longest Palindromic Substring, #647 Palindromic Substrings, #91 Decode Ways, #322 Coin Change, #152 Max Product Subarray, #139 Word Break, #300 Longest Increasing Subsequence, #62 Unique Paths, #64 Minimum Path Sum, #63 Unique Paths II, #1143 Longest Common Subsequence, #72 Edit Distance, #97 Interleaving String, #329 Longest Increasing Path in Matrix, #115 Distinct Subsequences, #309 Best Time to Buy/Sell Stock with Cooldown, #518 Coin Change 2, #494 Target Sum, #416 Partition Equal Subset Sum, #377 Combination Sum IV, #1049 Last Stone Weight II, #474 Ones and Zeroes</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,58)"></span><div class="task-body"><div class="main">Update patterns doc: 1D DP template, 2D DP template, knapsack decision framework <span class="tag tag-key">Habit</span></div></div></div>
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 11 — DP Advanced: Knapsack + Hard Patterns</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,59)"></span><div class="task-body"><div class="main">Knapsack variants: 0/1 knapsack, unbounded knapsack, subset sum, target sum, partition equal subset</div><div class="resource">▶ Educative — Grokking DP: "0/1 Knapsack" + "Unbounded Knapsack" patterns<br>▶ Your Repo — Coding Interview/17 0-1 Knapsack folder</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,60)"></span><div class="task-body"><div class="main">Interval DP + String DP: burst balloons, palindrome partitioning, regex matching, wildcard matching</div><div class="resource">▶ Educative — Grokking DP: "Palindromic Subsequence" pattern<br>▶ Tushar Roy YT — "Dynamic Programming" (selected hard problems)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,61)"></span><div class="task-body"><div class="main">Stock problems series: buy/sell with cooldown, with transaction fee, at most K transactions</div><div class="resource">▶ NeetCode YT — all "Best Time to Buy and Sell Stock" variants</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,62)"></span><div class="task-body"><div class="main">Solve 20 problems: LC #312 Burst Balloons, #10 Regular Expression Matching, #44 Wildcard Matching, #132 Palindrome Partitioning II, #188 Buy/Sell Stock IV, #714 Buy/Sell Stock with Transaction Fee, #123 Buy/Sell Stock III, #1235 Max Profit in Job Scheduling, #140 Word Break II, #516 Longest Palindromic Subsequence, #1312 Minimum Insertion Steps, #486 Predict the Winner, #877 Stone Game, #1547 Minimum Cost to Cut Stick, #87 Scramble String, #1000 Minimum Cost to Merge Stones, #221 Maximal Square, #85 Maximal Rectangle, #174 Dungeon Game, #514 Freedom Trail</div></div></div>
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 12 — Greedy, Intervals, Bit Manipulation, Math</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,63)"></span><div class="task-body"><div class="main">Pattern: Merge Intervals — overlapping intervals, insert interval, meeting rooms, merge, minimum platforms</div><div class="resource">▶ Educative — Grokking Coding Interview: "Pattern: Merge Intervals"<br>▶ Your Repo — Coding Interview/04 Merge Intervals folder<br>▶ NeetCode YT — "Intervals" playlist</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,64)"></span><div class="task-body"><div class="main">Greedy patterns: interval scheduling, jump game I/II, gas station, partition labels, task scheduler</div><div class="resource">▶ Educative — Grokking Coding Interview: Greedy sections<br>▶ NeetCode YT — "Greedy" playlist</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,65)"></span><div class="task-body"><div class="main">Pattern: Bitwise XOR — single number, missing number, counting bits, power of two, hamming weight <span class="tag tag-target">NVIDIA Loves This</span></div><div class="resource">▶ Educative — Grokking Coding Interview: "Pattern: Bitwise XOR"<br>▶ Your Repo — Coding Interview/15 Bitwise XOR folder<br>▶ NeetCode YT — "Bit Manipulation" playlist</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,66)"></span><div class="task-body"><div class="main">Pattern: Cyclic Sort — find missing number, find duplicate, first K missing positives</div><div class="resource">▶ Educative — Grokking Coding Interview: "Pattern: Cyclic Sort"<br>▶ Your Repo — Coding Interview/05 Cyclic Sort folder</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,67)"></span><div class="task-body"><div class="main">Math/geometry: GCD, primes, modular arithmetic, matrix rotation, spiral matrix</div><div class="resource">▶ NeetCode YT — "Math & Geometry" playlist</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,68)"></span><div class="task-body"><div class="main">Solve 30 problems: LC #56 Merge Intervals, #57 Insert Interval, #435 Non-Overlapping Intervals, #252 Meeting Rooms, #253 Meeting Rooms II, #1851 Minimum Interval, #55 Jump Game, #45 Jump Game II, #134 Gas Station, #763 Partition Labels, #621 Task Scheduler, #846 Hand of Straights, #1899 Merge Triplets, #678 Valid Parenthesis String, #136 Single Number, #268 Missing Number, #190 Reverse Bits, #338 Counting Bits, #371 Sum of Two Integers, #191 Hamming Weight, #7 Reverse Integer, #48 Rotate Image, #54 Spiral Matrix, #73 Set Matrix Zeroes, #202 Happy Number, #66 Plus One, #43 Multiply Strings, #50 Pow(x,n), #287 Find Duplicate (bit approach), #268 Missing Number (XOR approach)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,69)"></span><div class="task-body"><div class="main">Mock interview #2 — request a DP or graph hard problem <span class="tag tag-mock">Mock #2</span></div><div class="resource">▶ Pramp (free) or interviewing.io</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,70)"></span><div class="task-body"><div class="main">Update patterns doc: greedy decision framework, interval template, bit tricks cheatsheet, cyclic sort template <span class="tag tag-key">Habit</span></div></div></div>
+          </div>
+
+          <div class="output">
+            <h5>✓ End of Phase 3</h5>
+            <p>275 total problems · NeetCode 150 ~85% complete · All 16 DSA patterns covered · You can solve LC Medium in 20 min, Hard in 40 min. Time to shift to System Design.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="phase p4" onclick="this.classList.toggle('open')">
+      <div class="phase-head">
+        <span class="phase-num">Phase 4</span>
+        <h3>System Design + LLD + OS/Networks Mastery</h3>
+        <span class="phase-meta">Weeks 13–17 · ~120 hrs</span>
+        <span class="phase-toggle">▼</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-content">
+          <div class="phase-why">
+            <strong>This is your edge.</strong> You have 4 years of real backend experience, Docker, all 3 clouds. Most candidates fake SD knowledge — you have actual production scars. Primary sources: <strong>Grokking System Design Interview</strong> + <strong>Grokking Modern System Design</strong> + <strong>DDIA</strong> + <strong>Alex Xu Vol 1</strong> (all owned). Plus Educative courses for concurrency, API design, OS, networks.
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 13 — System Design Fundamentals + Building Blocks</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,71)"></span><div class="task-body"><div class="main">SD framework: requirements gathering → capacity estimation → API design → high-level design → deep-dive → bottlenecks</div><div class="resource">▶ Educative — "Grokking the System Design Interview" (Introduction + Glossary chapters)<br>▶ Alex Xu Book (owned) — Chapter 1: "Scale From Zero to Millions"</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,72)"></span><div class="task-body"><div class="main">Core concepts: latency vs throughput, CAP theorem, consistency models (strong/eventual/causal), ACID vs BASE</div><div class="resource">▶ DDIA (owned) — Chapter 1: "Reliable, Scalable, and Maintainable Applications"<br>▶ ByteByteGo YT — "CAP Theorem Simplified" + "ACID vs BASE" (free)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,73)"></span><div class="task-body"><div class="main">Building blocks deep-dive: load balancers (L4 vs L7, algorithms), reverse proxy, CDN, DNS</div><div class="resource">▶ Educative — "Grokking Modern System Design" (Building Blocks section — all modules)<br>▶ System Design Primer (GitHub) — load balancing + reverse proxy sections</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,74)"></span><div class="task-body"><div class="main">Caching deep-dive: cache strategies (write-through, write-back, write-around), eviction (LRU, LFU), Redis, Memcached, CDN caching</div><div class="resource">▶ Educative — "Grokking Modern System Design": "Distributed Cache" module<br>▶ Alex Xu Book — Chapter 5: "Design Consistent Hashing"</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,75)"></span><div class="task-body"><div class="main">Database choices: when to use Postgres vs MongoDB vs Cassandra vs DynamoDB vs Redis vs Elasticsearch. Understand sharding, replication, partitioning.</div><div class="resource">▶ DDIA (owned) — Chapter 5: "Replication" + Chapter 6: "Partitioning"<br>▶ Database Internals (owned) — Chapters 1-4: B-Trees, LSM Trees<br>▶ Educative — "Grokking Modern System Design": "Databases" module</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,76)"></span><div class="task-body"><div class="main">Message queues: Kafka, RabbitMQ, SQS — when to use which, exactly-once delivery, ordering guarantees</div><div class="resource">▶ DDIA (owned) — Chapter 11: "Stream Processing"<br>▶ ByteByteGo YT — "Kafka vs RabbitMQ" (free)</div></div></div>
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 14 — Classic System Designs (Bread & Butter)</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,77)"></span><div class="task-body"><div class="main">Design URL Shortener (TinyURL) — hashing, base62 encoding, read-heavy optimization</div><div class="resource">▶ Educative — Grokking SD: "Designing a URL Shortening Service"<br>▶ Alex Xu Book — Chapter 8: "Design a URL Shortener"<br>▶ Hello Interview YT — URL Shortener mock</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,78)"></span><div class="task-body"><div class="main">Design Rate Limiter — token bucket, leaky bucket, sliding window counter, sliding window log</div><div class="resource">▶ Alex Xu Book — Chapter 4: "Design a Rate Limiter"<br>▶ Educative — Grokking SD: rate limiting concepts</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,79)"></span><div class="task-body"><div class="main">Design Notification System — push (APNs, FCM), SMS, email, priority queue, retry/DLQ</div><div class="resource">▶ Alex Xu Book — Chapter 10: "Design a Notification System"<br>▶ Educative — Grokking Modern SD: notifications module</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,80)"></span><div class="task-body"><div class="main">Design Twitter/Instagram Feed — fan-out on write vs read, timeline service, ranking</div><div class="resource">▶ Educative — Grokking SD: "Designing Instagram" + "Designing Twitter"<br>▶ Educative — Grokking Modern SD: "Instagram" + "Newsfeed" modules<br>▶ Hello Interview YT — Twitter design mock</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,81)"></span><div class="task-body"><div class="main">Design Distributed Cache (Redis Cluster) — consistent hashing, replication, eviction, partitioning</div><div class="resource">▶ Educative — Grokking Modern SD: "Distributed Cache" module<br>▶ Alex Xu Book — Chapter 5: "Design Consistent Hashing"</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,82)"></span><div class="task-body"><div class="main">For EVERY design: draw architecture diagrams, write capacity estimates (QPS, storage, bandwidth), identify 3 trade-offs. DON'T just read — practice talking through it in 35 min. <span class="tag tag-key">Critical</span></div></div></div>
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 15 — Target Company System Designs + API Design</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,83)"></span><div class="task-body"><div class="main">Design Stripe-like Payment System — idempotency keys, double-entry ledger, distributed transactions, webhook delivery, retry with exponential backoff <span class="tag tag-target">Stripe</span></div><div class="resource">▶ Educative — "Grokking the API Design Interview" (full course — USE THIS)<br>▶ Stripe Engineering Blog — "Designing robust and predictable APIs"<br>▶ Alex Xu Book — payment system design concepts</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,84)"></span><div class="task-body"><div class="main">Design Jira/Trello — real-time collaborative editing, task state machine, notifications, search (Elasticsearch) <span class="tag tag-target">Atlassian</span></div><div class="resource">▶ Educative — Grokking SD: "Designing a Collaborative Editor"<br>▶ Educative — Grokking Modern SD: "Collaborative Document Editing" module</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,85)"></span><div class="task-body"><div class="main">Design CDN / Edge Caching System — PoP architecture, cache invalidation, DNS-based routing, origin shield, hot-spot handling <span class="tag tag-target">Akamai</span></div><div class="resource">▶ Educative — Grokking Modern SD: "Content Delivery Network (CDN)" module<br>▶ Akamai Engineering Blog — CDN architecture posts</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,86)"></span><div class="task-body"><div class="main">Design Distributed Task Scheduler / Job Queue — high QPS, priority scheduling, exactly-once execution, dead-letter queues <span class="tag tag-target">NVIDIA</span></div><div class="resource">▶ Educative — Grokking Modern SD: "Distributed Task Scheduler" module<br>▶ Your Repo — Grokking Advanced SD: "Distributed Job Scheduling" material</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,87)"></span><div class="task-body"><div class="main">API Design deep-dive: REST best practices, versioning, pagination, error handling, idempotency, rate limiting at API level</div><div class="resource">▶ Educative — "Grokking the API Design Interview" (complete all modules)<br>▶ Stripe API docs — study as gold standard for API design</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,88)"></span><div class="task-body"><div class="main">Mock SD interview — practice one of the above designs with a timer (35 min) <span class="tag tag-mock">Mock #3</span></div><div class="resource">▶ Hello Interview YT — watch 2-3 system design mock videos<br>▶ Pramp — schedule a system design mock</div></div></div>
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 16 — Advanced Designs + LLD (OOP Design)</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,89)"></span><div class="task-body"><div class="main">Design WhatsApp/Slack — websockets, presence service, message ordering, read receipts, E2E encryption</div><div class="resource">▶ Educative — Grokking SD: "Designing Facebook Messenger"<br>▶ Educative — Grokking Modern SD: "WhatsApp" module<br>▶ Alex Xu Book — Chapter 12: "Design a Chat System"</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,90)"></span><div class="task-body"><div class="main">Design Uber/Swiggy — geo-indexing (geohash/quadtree), real-time matching, ETA calculation, surge pricing</div><div class="resource">▶ Educative — Grokking SD: "Designing Uber"<br>▶ Educative — Grokking Modern SD: "Uber" module<br>▶ Alex Xu Book — Chapter 13: "Design a Nearby Friends" (geo concepts)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,91)"></span><div class="task-body"><div class="main">Design YouTube/Netflix — video upload pipeline, transcoding, adaptive bitrate streaming, recommendation</div><div class="resource">▶ Educative — Grokking SD: "Designing YouTube"<br>▶ Educative — Grokking Modern SD: "YouTube" module<br>▶ Alex Xu Book — Chapter 14: "Design YouTube"</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,92)"></span><div class="task-body"><div class="main">Design Google Docs — operational transformation (OT) vs CRDT, conflict resolution, versioning</div><div class="resource">▶ Educative — Grokking Modern SD: "Collaborative Document Editing"</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,93)"></span><div class="task-body"><div class="main">LLD / OOP Design: Review your Grokking OOP Design materials — focus on Parking Lot, Movie Ticket Booking, Library Management, Amazon Shopping</div><div class="resource">▶ Your Repo — GROK OOP Interview folder (28 HTML files — work through top 8 designs)<br>▶ Educative — "Grokking the Object-Oriented Design Interview"</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,94)"></span><div class="task-body"><div class="main">Practice LLD: design a parking lot system in Python — classes, interfaces, SOLID principles, design patterns (strategy, observer, factory)</div><div class="resource">▶ Educative — "Software Design Patterns: Best Practices for Software Developers"</div></div></div>
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 17 — OS, Networks, Concurrency + Final SD Practice</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,95)"></span><div class="task-body"><div class="main">OS refresh: processes vs threads, context switching, mutex/semaphore/spinlock, deadlock (prevention/detection/avoidance), virtual memory, paging <span class="tag tag-target">NVIDIA + Akamai</span></div><div class="resource">▶ Educative — "Operating Systems: Virtualization, Concurrency & Persistence" (focus on Concurrency section)<br>▶ Educative — "Grokking Multithreading and Concurrency for Coding Interviews" (MUST DO for NVIDIA)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,96)"></span><div class="task-body"><div class="main">Concurrency deep-dive: thread pools, producer-consumer, readers-writers, dining philosophers, async/await patterns <span class="tag tag-target">NVIDIA</span></div><div class="resource">▶ Educative — "Grokking Multithreading and Concurrency" (complete all modules — critical for NVIDIA)<br>▶ Educative — "Java Multithreading for Senior Engineering Interviews" (concepts apply to any language)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,97)"></span><div class="task-body"><div class="main">Networks refresh: OSI/TCP-IP model, TCP vs UDP (when to use which), TLS handshake, HTTP/1.1 vs HTTP/2 vs HTTP/3, DNS resolution, WebSockets <span class="tag tag-target">Akamai</span></div><div class="resource">▶ Educative — "Grokking Computer Networking for Software Engineers" (MUST DO for Akamai)<br>▶ Educative — "Web Application and Software Architecture 101" (networking chapters)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,98)"></span><div class="task-body"><div class="main">DBMS refresh: indexing (B-tree, hash), transactions (isolation levels), MVCC, query optimization, connection pooling</div><div class="resource">▶ DDIA (owned) — Chapter 7: "Transactions" + Chapter 3: "Storage and Retrieval"<br>▶ Database Internals (owned) — Chapters 1-2</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,99)"></span><div class="task-body"><div class="main">Read from your repo: Grokking Advanced SD materials — Dynamo, Kafka, GFS, BigTable, Chubby/Zookeeper</div><div class="resource">▶ Your Repo — Grokking Advanced System Design Interview (ZIP)<br>▶ Google SRE Workbook (owned) — Chapters 2, 4, 5 (SLOs, monitoring)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,100)"></span><div class="task-body"><div class="main">Mock SD interview #4 — full 45-min simulation, preferably with a friend or on interviewing.io <span class="tag tag-mock">Mock #4</span></div></div></div>
+          </div>
+
+          <div class="output">
+            <h5>✓ End of Phase 4</h5>
+            <p>12+ HLD system designs practiced · 4+ LLD designs · API design mastered · OS/Networks/DBMS refreshed · Concurrency patterns known · Can confidently lead a 45-min SD interview.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 5 -->
+    <div class="phase p5" onclick="this.classList.toggle('open')">
+      <div class="phase-head">
+        <span class="phase-num">Phase 5</span>
+        <h3>Apply, Interview, Iterate</h3>
+        <span class="phase-meta">Weeks 18–20 · ~60 hrs + interview time</span>
+        <span class="phase-toggle">▼</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-content">
+          <div class="phase-why">
+            <strong>Action phase.</strong> By Week 18 you've prepped enough. Now get into interview loops, fail some, learn fast, iterate. Don't wait until you "feel ready" — you never will. Buy <strong>LeetCode Premium</strong> now for company-tagged questions.
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 18 — Resume, LinkedIn, Application Blitz</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,101)"></span><div class="task-body"><div class="main">Resume rewrite: 1 page, metric-driven bullets ("Reduced API latency by 40% by implementing Redis caching layer"), strong tech keywords</div><div class="resource">▶ techinterviewhandbook.org/resume — best free template + examples<br>▶ Educative — "Grokking the Behavioral Interview": Resume section</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,102)"></span><div class="task-body"><div class="main">LinkedIn polish: detailed experience with impact metrics, skills section maxed (Python, Go, Distributed Systems, AWS, GCP, Azure, Docker, Kubernetes), "Open to Work" toggled (recruiters only)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,103)"></span><div class="task-body"><div class="main">Build 1 portfolio project: a distributed system in Go — rate limiter, URL shortener, or pub-sub system. Push to GitHub with clean README <span class="tag tag-project">Project</span></div><div class="resource">▶ Educative — "Web Application and Software Architecture 101" (for architecture decisions)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,104)"></span><div class="task-body"><div class="main">Buy LeetCode Premium now — solve last 6 months of company-tagged questions for: Atlassian, NVIDIA, Akamai, Stripe, Adobe, Microsoft <span class="tag tag-key">Buy Now</span></div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,105)"></span><div class="task-body"><div class="main">Application blitz: apply to 30-40 companies — 10 Tier S (stable homes), 10 Tier D (hidden gems), 10 Tier A (upside), 5 Tier B (stretch). Lead with employee referrals via LinkedIn <span class="tag tag-apply">Apply Hard</span></div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,106)"></span><div class="task-body"><div class="main">Company-specific LC grind: solve top 20 tagged problems for each target company from LeetCode Premium</div><div class="resource">▶ LeetCode Premium — Company tag filter (sort by frequency, last 6 months)</div></div></div>
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 19 — Behavioral Prep + Company-Specific Deep-Dives</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,107)"></span><div class="task-body"><div class="main">Prepare 8 STAR stories: leadership, conflict resolution, failure/learning, ambiguity, technical tradeoff decision, mentoring, scope cut, deadline pressure</div><div class="resource">▶ Educative — "Grokking the Behavioral Interview" (complete all modules)<br>▶ techinterviewhandbook.org/behavioral — question bank</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,108)"></span><div class="task-body"><div class="main">Atlassian-specific: prepare stories for their 5 values — "Open company, no bullshit", "Build with heart and balance", "Don't #@!% the customer", "Play, as a team", "Be the change you seek" <span class="tag tag-target">Atlassian</span></div><div class="resource">▶ Educative — Grokking Behavioral: company-specific sections</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,109)"></span><div class="task-body"><div class="main">Stripe-specific: practice debugging unfamiliar code (Python/Ruby). Read 5-10 open source PRs. Practice CSV parsing, API building, real-world messy data problems <span class="tag tag-target">Stripe</span></div><div class="resource">▶ Stripe's open source repos on GitHub — read PRs for code style</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,110)"></span><div class="task-body"><div class="main">NVIDIA-specific: brush up on C/C++ basics (not required but helps), low-level systems questions, memory management, cache lines <span class="tag tag-target">NVIDIA</span></div><div class="resource">▶ Educative — "Grokking Multithreading and Concurrency" (revise)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,111)"></span><div class="task-body"><div class="main">Project deep-dive prep: pick 2-3 hardest projects from your current job. Document: architecture, scale, YOUR specific contributions, tradeoffs made, what you'd do differently</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,112)"></span><div class="task-body"><div class="main">Daily: 2-3 LeetCode problems (company-tagged, mix of patterns) to stay sharp <span class="tag tag-key">Maintain</span></div></div></div>
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 20 — Active Interview Loops</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,113)"></span><div class="task-body"><div class="main">By now: 5-10 OAs completed, several recruiter screens, first-round interviews starting</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,114)"></span><div class="task-body"><div class="main">Document every interview: questions asked, your answers, what was hard, interviewer reactions. Review weekly to find weak spots.</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,115)"></span><div class="task-body"><div class="main">Mock interviews 3x/week — alternate between DSA and System Design mocks <span class="tag tag-mock">Mock #5+</span></div><div class="resource">▶ Pramp (free) — 2x/week<br>▶ interviewing.io — 1x/week (real engineers from target companies)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,116)"></span><div class="task-body"><div class="main">Keep applying — onsite-to-offer ratio is ~30%, so you need 5+ onsites for at least 1 offer. Don't slow down applications.</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,117)"></span><div class="task-body"><div class="main">If a target company rejects: schedule a "post-mortem" — list what went wrong, fill the gap, reapply in 6 months (cooldown period)</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,118)"></span><div class="task-body"><div class="main">Continue daily: 2 LC problems (weak areas) + 1 SD design talk-through (30 min each)</div></div></div>
+          </div>
+
+          <div class="output">
+            <h5>✓ End of Phase 5</h5>
+            <p>50+ applications submitted · 5-10 active interview loops · 8+ mock interviews done · Company-tagged problems solved · 1+ offer expected.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 6 -->
+    <div class="phase p6" onclick="this.classList.toggle('open')">
+      <div class="phase-head">
+        <span class="phase-num">Phase 6</span>
+        <h3>Negotiate, Close, Onboard</h3>
+        <span class="phase-meta">Week 21 · ~20 hrs</span>
+        <span class="phase-toggle">▼</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-content">
+          <div class="phase-why">
+            <strong>Negotiation is where you make 20-30% more, instantly.</strong> Don't accept the first offer. Don't reveal your current salary. Every component is negotiable.
+          </div>
+
+          <div class="week">
+            <div class="week-title"><span class="dot"></span> Week 21 — Final Push & Negotiation</div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,119)"></span><div class="task-body"><div class="main">Read "Ten Rules for Negotiating a Job Offer" by Haseeb Qureshi — best free negotiation guide ever written</div><div class="resource">▶ Google: "Haseeb Qureshi ten rules negotiating" — free blog post<br>▶ techinterviewhandbook.org/negotiation — additional tactics</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,120)"></span><div class="task-body"><div class="main">Try to get multiple offers in the same 2-week window — this gives massive leverage for negotiation</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,121)"></span><div class="task-body"><div class="main">When asked salary expectations: "I'm interviewing at the SDE 2 / Senior level. Based on Levels.fyi, I'm looking at total comp in the ₹55-75L range." NEVER reveal your current ₹17.6L.</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,122)"></span><div class="task-body"><div class="main">Negotiate every component: base salary, RSU/ESOP, sign-on bonus, joining bonus, relocation, vacation days, start date, work-from-home policy</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,123)"></span><div class="task-body"><div class="main">Cross-leverage offers: "I have an offer from X at ₹Y total comp. I'd love to join you, but there's a gap of ₹Z. Can you close it?"</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,124)"></span><div class="task-body"><div class="main">Verify offer details: vesting schedule (1yr cliff?), bonus structure (guaranteed vs performance?), RSU refresh policy, team/manager</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,125)"></span><div class="task-body"><div class="main">Once signed: notify current employer with 30-90 day notice (Indian norm), transition work professionally, don't burn bridges</div></div></div>
+            <div class="task"><span class="task-check" onclick="event.stopPropagation(); tog(this,126)"></span><div class="task-body"><div class="main">Update Levels.fyi with your offer anonymously — helps the next person. Update LinkedIn title.</div></div></div>
+          </div>
+
+          <div class="output">
+            <h5>✓ October 2026 — Goal Achieved</h5>
+            <p>You started May at ₹17.6L · You finish October with a ₹50-80L+ Senior SDE / SDE 2 offer · You picked the company with the best WLB and 5-10 year stability fit · You leveraged every free + owned resource first · You have a structured leveling-up plan for the next decade.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- DSA PATTERNS REFERENCE -->
+  <section class="section">
+    <div class="section-eyebrow">Reference</div>
+    <h2 class="section-title">The 16 DSA Patterns You Must Know</h2>
+    <p class="section-desc">Every interview question is a variation of one of these. All 16 are covered in <strong>Grokking the Coding Interview</strong> (Educative) + your repo's Coding Interview folders. Print this. Refer to it often.</p>
+    <div class="pattern-grid">
+      <div class="pattern-card"><div class="pname">1. Two Pointers</div><div class="pcount">Sorted arrays, palindromes</div></div>
+      <div class="pattern-card"><div class="pname">2. Sliding Window</div><div class="pcount">Subarrays, longest substring</div></div>
+      <div class="pattern-card"><div class="pname">3. Fast & Slow Pointers</div><div class="pcount">Cycle detection, mid-list</div></div>
+      <div class="pattern-card"><div class="pname">4. Merge Intervals</div><div class="pcount">Overlapping ranges</div></div>
+      <div class="pattern-card"><div class="pname">5. Cyclic Sort</div><div class="pcount">In-place sorting tricks</div></div>
+      <div class="pattern-card"><div class="pname">6. In-Place Reversal</div><div class="pcount">Linked list reversals</div></div>
+      <div class="pattern-card"><div class="pname">7. BFS</div><div class="pcount">Level order, shortest path</div></div>
+      <div class="pattern-card"><div class="pname">8. DFS</div><div class="pcount">Path-finding, components</div></div>
+      <div class="pattern-card"><div class="pname">9. Two Heaps</div><div class="pcount">Median in stream</div></div>
+      <div class="pattern-card"><div class="pname">10. Subsets / Backtracking</div><div class="pcount">Permutations, combinations</div></div>
+      <div class="pattern-card"><div class="pname">11. Modified Binary Search</div><div class="pcount">Rotated arrays, peaks</div></div>
+      <div class="pattern-card"><div class="pname">12. Top K Elements</div><div class="pcount">Heap-based selection</div></div>
+      <div class="pattern-card"><div class="pname">13. K-Way Merge</div><div class="pcount">Merge K sorted lists</div></div>
+      <div class="pattern-card"><div class="pname">14. Topological Sort</div><div class="pcount">Course schedule, deps</div></div>
+      <div class="pattern-card"><div class="pname">15. Dynamic Programming</div><div class="pcount">Memoization, tabulation</div></div>
+      <div class="pattern-card"><div class="pname">16. Bitwise XOR</div><div class="pcount">Single number tricks</div></div>
+    </div>
+  </section>
+
+  <!-- DAILY SCHEDULE -->
+  <section class="section">
+    <div class="section-eyebrow">Daily Discipline</div>
+    <h2 class="section-title">Two Schedules · 3.5–4 hrs Study · 7+ hrs Sleep</h2>
+    <p class="section-desc">Built around your real life — badminton, office, sleep, and free time for series. Two variants depending on whether you play morning or evening.</p>
+
+    <div style="margin-bottom:20px; padding:16px 20px; background:linear-gradient(135deg, rgba(16,185,129,0.06), rgba(6,182,212,0.03)); border-radius:12px; border:1px solid rgba(16,185,129,0.2); font-size:13px; color:var(--text-mid);">
+      <strong style="color:var(--green)">Schedule A — Morning Badminton (Primary)</strong><br>
+      <span style="font-family:'IBM Plex Mono',monospace; font-size:11px;">Study: 4 hrs · Sleep: 7 hrs · Free: 1 hr · Badminton: 2 hrs</span>
+    </div>
+
+    <div class="schedule-grid">
+      <div class="sched-card">
+        <div class="time">4:30 AM</div>
+        <div class="activity" style="color:var(--text-mid)">Wake Up</div>
+        <div class="detail">Alarm. No snooze. Splash water. Go.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">5:00 - 7:00 AM</div>
+        <div class="activity" style="color:var(--green)">Badminton</div>
+        <div class="detail">2 hrs of play. Best cardio + mental reset for the grind ahead.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">7:00 - 7:45 AM</div>
+        <div class="activity" style="color:var(--text-mid)">Shower + Breakfast</div>
+        <div class="detail">Get ready. Eat well — you're burning energy on both ends.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">7:45 - 9:00 AM</div>
+        <div class="activity" style="color:var(--green)">Theory Block</div>
+        <div class="detail">Educative course / NeetCode video on the day's pattern. Fresh mind = best absorption.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">9:00 - 10:15 AM</div>
+        <div class="activity" style="color:var(--blue)">Solve Block</div>
+        <div class="detail">2-3 LeetCode problems with 25-min timer each. No peeking. Push to GitHub.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">10:30 - 11:00 AM</div>
+        <div class="activity" style="color:var(--text-dim)">Commute → Office</div>
+        <div class="detail">Listen to a podcast (ByteByteGo, Engineering blogs) during commute.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">11:00 - 5:00 PM</div>
+        <div class="activity" style="color:var(--text-mid)">Office</div>
+        <div class="detail">Day job. If you get 15 min breaks — review patterns doc or skim 1 LC solution.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">5:00 - 6:00 PM</div>
+        <div class="activity" style="color:var(--text-dim)">Commute → Home</div>
+        <div class="detail">Podcast or mental review of morning problems.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">6:00 - 7:00 PM</div>
+        <div class="activity" style="color:var(--text-mid)">Dinner + Rest</div>
+        <div class="detail">Eat. Decompress. Don't skip this — rest fuels the next block.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">7:00 - 8:30 PM</div>
+        <div class="activity" style="color:var(--blue)">Solve + Notes</div>
+        <div class="detail">2-3 more LC problems + update patterns doc. Push to GitHub. Total: ~4 hrs study.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">8:30 - 9:30 PM</div>
+        <div class="activity" style="color:var(--violet)">Free Time</div>
+        <div class="detail">Series, YouTube, chill. This hour is sacred — don't guilt-trip yourself.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">9:30 PM → 4:30 AM</div>
+        <div class="activity" style="color:var(--cyan)">Sleep</div>
+        <div class="detail">7 hours. Non-negotiable. Sleep debt kills recall and pattern recognition.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px; margin-bottom:20px; padding:16px 20px; background:linear-gradient(135deg, rgba(245,158,11,0.06), rgba(244,63,94,0.03)); border-radius:12px; border:1px solid rgba(245,158,11,0.2); font-size:13px; color:var(--text-mid);">
+      <strong style="color:var(--amber)">Schedule B — Evening Badminton (When you miss morning)</strong><br>
+      <span style="font-family:'IBM Plex Mono',monospace; font-size:11px;">Study: 3.5 hrs · Sleep: 8 hrs · Free: 45 min · Badminton: 2 hrs</span>
+    </div>
+
+    <div class="schedule-grid">
+      <div class="sched-card">
+        <div class="time">7:00 AM</div>
+        <div class="activity" style="color:var(--text-mid)">Wake Up</div>
+        <div class="detail">Sleep in — you'll need energy for evening badminton.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">7:00 - 7:45 AM</div>
+        <div class="activity" style="color:var(--text-mid)">Shower + Breakfast</div>
+        <div class="detail">Get ready for the day.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">7:45 - 10:15 AM</div>
+        <div class="activity" style="color:var(--green)">Theory + Solve</div>
+        <div class="detail">2.5 hrs — Educative / NeetCode theory (45 min) + 2-3 LC problems (1.5 hr). This is your main study block.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">10:30 - 11:00 AM</div>
+        <div class="activity" style="color:var(--text-dim)">Commute → Office</div>
+        <div class="detail">Podcast during commute.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">11:00 - 5:30 PM</div>
+        <div class="activity" style="color:var(--text-mid)">Office</div>
+        <div class="detail">Day job.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">5:30 - 6:30 PM</div>
+        <div class="activity" style="color:var(--text-dim)">Commute → Home</div>
+        <div class="detail">Podcast or mental review.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">6:30 - 7:15 PM</div>
+        <div class="activity" style="color:var(--text-mid)">Dinner</div>
+        <div class="detail">Eat before badminton — keep it light.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">7:15 - 8:00 PM</div>
+        <div class="activity" style="color:var(--violet)">Free Time</div>
+        <div class="detail">Series episode or quick chill before badminton. 45 min.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">8:00 - 10:00 PM</div>
+        <div class="activity" style="color:var(--green)">Badminton</div>
+        <div class="detail">2 hrs evening session.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">10:00 - 10:30 PM</div>
+        <div class="activity" style="color:var(--text-mid)">Shower + Wind Down</div>
+        <div class="detail">Cool down, get ready for bed.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">10:30 - 11:00 PM</div>
+        <div class="activity" style="color:var(--blue)">Quick Review</div>
+        <div class="detail">30 min — update patterns doc, review 1-2 solutions, push to GitHub. Total: ~3.5 hrs study.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">11:00 PM → 7:00 AM</div>
+        <div class="activity" style="color:var(--cyan)">Sleep</div>
+        <div class="detail">8 hours. Extra rest to compensate for late badminton.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px; margin-bottom:12px; padding:16px 20px; background:linear-gradient(135deg, rgba(139,92,246,0.06), rgba(59,130,246,0.03)); border-radius:12px; border:1px solid rgba(139,92,246,0.2); font-size:13px; color:var(--text-mid);">
+      <strong style="color:var(--violet)">Weekends — Deep Work Mode</strong>
+    </div>
+
+    <div class="schedule-grid">
+      <div class="sched-card">
+        <div class="time">Saturday</div>
+        <div class="activity" style="color:var(--amber)">Deep Work</div>
+        <div class="detail">5-6 hrs on the hardest topic of the week. System design practice from Week 13. Take a 2-hr free time block too.</div>
+      </div>
+      <div class="sched-card">
+        <div class="time">Sunday</div>
+        <div class="activity" style="color:var(--cyan)">Review + Mocks</div>
+        <div class="detail">Redo 5 hardest problems from the week. Mock interview from Week 9+. Rest and recover — sustainable grind.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px; padding:16px 20px; background:var(--surface); border-radius:12px; border:1px solid var(--border); font-size:13px; color:var(--text-mid);">
+      <strong style="color:var(--cyan)">Sustainability rules:</strong> (1) Morning badminton = morning study is your best day — prioritize Schedule A. (2) Take 1 evening fully off per week — no study, no guilt. (3) If you skip study one day, don't try to "make up" 8 hrs next day — just do the normal 4 hrs. (4) Sleep is prep. 6 hrs sleep = 50% worse recall. Protect those 7-8 hrs.
+    </div>
+
+    <div style="margin-top:10px; padding:14px 18px; background:var(--surface2); border-radius:10px; font-size:12px; color:var(--text-dim); font-family:'IBM Plex Mono',monospace; letter-spacing:0.3px; line-height:1.8;">
+      <strong style="color:var(--green)">Weekly totals:</strong><br>
+      Weekdays (Schedule A × 5): ~20 hrs study<br>
+      Weekdays (Schedule B days): ~17.5 hrs study (if 5 days)<br>
+      Saturday deep work: ~5 hrs<br>
+      Sunday review: ~3 hrs<br>
+      <strong style="color:var(--amber)">Total: ~25-28 hrs/week</strong> — enough to cover 300+ problems + 12 system designs in 21 weeks.
+    </div>
+  </section>
+
+  <!-- MISTAKES -->
+  <section class="section">
+    <div class="section-eyebrow">Trap Avoidance</div>
+    <h2 class="section-title">Don't Make These Mistakes</h2>
+    <div class="mistakes-grid">
+      <div class="mistake">
+        <div class="bad">✗ Solving 50 random LeetCode problems</div>
+        <div class="good">✓ Solve 30 problems mapped to 16 patterns. Patterns >> problem count.</div>
+      </div>
+      <div class="mistake">
+        <div class="bad">✗ Reading solutions before trying for 25 min</div>
+        <div class="good">✓ Struggle is where learning happens. Set a timer. Only peek after.</div>
+      </div>
+      <div class="mistake">
+        <div class="bad">✗ Skipping the "patterns doc" — feels like extra work</div>
+        <div class="good">✓ This doc is what you'll review the night before interviews. Build it from Day 1.</div>
+      </div>
+      <div class="mistake">
+        <div class="bad">✗ Waiting until Week 18 to apply</div>
+        <div class="good">✓ Start applying Week 15. The pipeline takes 4-8 weeks. October offers = July/August applications.</div>
+      </div>
+      <div class="mistake">
+        <div class="bad">✗ Telling recruiters "I currently make 17.6L"</div>
+        <div class="good">✓ Never reveal current pay. Always ask for the band first. "What's the range for this role?"</div>
+      </div>
+      <div class="mistake">
+        <div class="bad">✗ Accepting the first offer because of relief</div>
+        <div class="good">✓ Negotiate every offer. 15-25% bumps are normal. They expect it.</div>
+      </div>
+      <div class="mistake">
+        <div class="bad">✗ Skipping mock interviews because they're awkward</div>
+        <div class="good">✓ Mocks expose blind spots cheaply. 8 mocks = 1 successful real interview.</div>
+      </div>
+      <div class="mistake">
+        <div class="bad">✗ Studying DSA in isolation, ignoring system design</div>
+        <div class="good">✓ At 2-4 yrs experience, system design IS the differentiator. Don't underweight it.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DECISION TREE -->
+  <section class="section">
+    <div class="section-eyebrow">Strategic Calls</div>
+    <h2 class="section-title">Where to Spend Marginal Hours</h2>
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:24px;">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+        <div>
+          <h4 style="font-size:14px; color:var(--green); font-family:'IBM Plex Mono',monospace; letter-spacing:1px; margin-bottom:8px;">↑ DOUBLE DOWN</h4>
+          <ul style="list-style:none; font-size:13px; color:var(--text-mid); line-height:1.8;">
+            <li>• <strong>System design</strong> — your real edge</li>
+            <li>• <strong>Behavioral / STAR stories</strong> — Atlassian's deciding factor</li>
+            <li>• <strong>Networking on LinkedIn</strong> — referrals 5x your callback rate</li>
+            <li>• <strong>Mock interviews</strong> — fastest feedback loop</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-size:14px; color:var(--rose); font-family:'IBM Plex Mono',monospace; letter-spacing:1px; margin-bottom:8px;">↓ DON'T OVER-INVEST</h4>
+          <ul style="list-style:none; font-size:13px; color:var(--text-mid); line-height:1.8;">
+            <li>• <strong>Hard DP problems</strong> — diminishing returns past 30</li>
+            <li>• <strong>Competitive programming</strong> — different skill, not needed</li>
+            <li>• <strong>Side projects unrelated to backend</strong> — focus on what's tested</li>
+            <li>• <strong>Multiple new languages</strong> — Python is enough</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<section class="footer">
+  <div class="big">May 6 → <em>October 2026</em></div>
+  <p>21 weeks. 300+ problems. 10 system designs. 50 applications. One life-changing offer.</p>
+  <p style="margin-top:8px; opacity:0.5;">Built with Claude · Personalized for Athul · Senior SDE / 4 YOE · ₹17.6L → ₹50-80L target</p>
+</section>
+
+</div><!-- /roadmap-wrap -->
+
+<script>
+/* === AUTH === */
+const loginGate = document.getElementById('loginGate');
+const roadmapWrap = document.getElementById('roadmapWrap');
+const floatNav = document.getElementById('floatNav');
+const passInput = document.getElementById('passInput');
+
+if (sessionStorage.getItem('roadmap_auth') === 'true') {
+  loginGate.style.display = 'none';
+  roadmapWrap.style.display = 'block';
+  floatNav.style.display = 'flex';
+}
+
+document.getElementById('loginBtn').addEventListener('click', tryLogin);
+passInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+
+function tryLogin() {
+  if (passInput.value === 'Athul@1018') {
+    sessionStorage.setItem('roadmap_auth', 'true');
+    loginGate.style.display = 'none';
+    roadmapWrap.style.display = 'block';
+    floatNav.style.display = 'flex';
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+    passInput.value = ''; passInput.focus();
+  }
+}
+
+/* === THEME === */
+const html = document.documentElement;
+const themeBtn = document.getElementById('themeBtn');
+html.dataset.theme = localStorage.getItem('roadmap_theme') || 'dark';
+themeBtn.textContent = html.dataset.theme === 'dark' ? '☀️' : '🌙';
+themeBtn.addEventListener('click', () => {
+  const n = html.dataset.theme === 'dark' ? 'light' : 'dark';
+  html.dataset.theme = n; localStorage.setItem('roadmap_theme', n);
+  themeBtn.textContent = n === 'dark' ? '☀️' : '🌙';
+});
+
+/* === TASKS === */
+function tog(el, idx) {
+  el.classList.toggle('done');
+  const key = `sde-task-${idx}`;
+  try {
+    if (el.classList.contains('done')) localStorage.setItem(key, '1');
+    else localStorage.removeItem(key);
+  } catch(e) {}
+}
+document.querySelectorAll('.task-check').forEach((el, i) => {
+  try { if (localStorage.getItem(`sde-task-${i}`) === '1') el.classList.add('done'); } catch(e) {}
+});
+</script>
+</body>
+</html>
