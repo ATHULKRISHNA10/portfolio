@@ -123,7 +123,10 @@ function updateAmount(month, year, cardIndex, amount) {
   }
 
   const col = CARD_COL_START + cardIndex;
-  sheet.getRange(row, col).setValue(amount);
+  const cell = sheet.getRange(row, col);
+  cell.setValue(amount);
+  cell.setFontColor(TEXT_COLOR);
+  cell.setFontWeight('normal');
 
   return jsonResponse({
     success: true,

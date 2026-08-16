@@ -382,7 +382,7 @@
         }
         if (monthNames.includes(row[1]?.toUpperCase())) {
           const amounts = row.slice(3, 12).map(v => parseFloat(v) || 0);
-          const total = parseFloat(row[12]) || amounts.reduce((a, b) => a + b, 0);
+          const total = amounts.reduce((a, b) => a + b, 0);
           MONTHS.push({ month: row[1], year: row[2], amounts, total });
         }
       }
