@@ -66,6 +66,11 @@ function doPost(e) {
       return updateAmount(data.month, data.year, data.cardIndex, data.amount);
     }
 
+    // Earnings Bot mirror (token-protected) — see the block at the end of this file
+    if (action === 'earningsSync') {
+      return earningsSync(data);
+    }
+
     return jsonResponse({ success: false, error: 'Unknown action' });
   } catch (err) {
     return jsonResponse({ success: false, error: err.message });
@@ -159,4 +164,90 @@ function getPaymentStatus() {
 function jsonResponse(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+
+// ============================================================
+// Earnings Bot → "Earnings" tab  (block added to the Card Tracker script)
+// ============================================================
+// This block lives inside the existing Card Tracker Apps Script
+// (LEARNINGS/about_me/apps-script.js), which already serves the sheet as a
+// web app. One script can only have one doPost, so the tracker's doPost
+// routes action "earningsSync" here; the tracker's own actions are untouched.
+//
+// Everything is written to ONE tab named "Earnings" (created if missing),
+// stacked as sections. The tab is a read-only mirror of the bot's database:
+// it is fully rewritten on every sync, so don't type into it.
+//
+// One-time setup:
+//  1. Paste the full apps-script.js (tracker + this block) into the sheet's
+//     Apps Script editor, replacing the old code → Save.
+//  2. Run `setupEarnings` once (function dropdown → Run). The Execution log
+//     prints SHEETS_TOKEN. Copy it.
+//  3. Deploy → Manage deployments → ✏️ Edit the existing Web app deployment →
+//     Version: "New version" → Deploy. The URL stays the same, so the card
+//     tracker keeps working.
+//  4. Bot environment (.env, Railway, GitHub secrets):
+//       SHEETS_WEBAPP_URL = that same /exec URL
+//       SHEETS_TOKEN      = the token from step 2
+// ============================================================
+
+const EARNINGS_TAB = 'Earnings';
+const EARNINGS_ORDER = ['Summary', 'Positions', 'Watchlist', 'Paper', 'Trades', 'Equity', 'Paper trades'];
+
+function setupEarnings() {
+  const props = PropertiesService.getScriptProperties();
+  let token = props.getProperty('EARNINGS_TOKEN');
+  if (!token) {
+    token = Utilities.getUuid().replace(/-/g, '') + Utilities.getUuid().replace(/-/g, '');
+    props.setProperty('EARNINGS_TOKEN', token);
+  }
+  Logger.log('SHEETS_TOKEN=' + token);
+}
+
+function earningsSync(data) {
+  const token = PropertiesService.getScriptProperties().getProperty('EARNINGS_TOKEN');
+  if (!token || data.token !== token) return jsonResponse({ success: false, ok: false, error: 'unauthorized' });
+  if (!data.tables || typeof data.tables !== 'object') return jsonResponse({ success: false, ok: false, error: 'no tables' });
+
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(30000)) return jsonResponse({ success: false, ok: false, error: 'busy' });
+  try {
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sh = ss.getSheetByName(EARNINGS_TAB) || ss.insertSheet(EARNINGS_TAB);
+    sh.clear();
+    const names = EARNINGS_ORDER.filter((n) => data.tables[n])
+      .concat(Object.keys(data.tables).filter((n) => EARNINGS_ORDER.indexOf(n) < 0));
+
+    sh.getRange(1, 1).setValue('Earnings Bot — read-only mirror, rewritten on every sync. Synced ' +
+      Utilities.formatDate(new Date(), 'Asia/Kolkata', 'yyyy-MM-dd HH:mm') + ' IST')
+      .setFontWeight('bold').setFontSize(12);
+
+    let row = 3, width = 1;
+    const counts = {};
+    names.forEach((name) => {
+      const rows = data.tables[name] || [];
+      counts[name] = Math.max(0, rows.length - 1);
+      sh.getRange(row, 1).setValue(name).setFontWeight('bold').setFontSize(11).setFontColor('#0A6B49');
+      row += 1;
+      if (!rows.length) { row += 1; return; }
+      const w = Math.max.apply(null, rows.map((r) => r.length));
+      width = Math.max(width, w);
+      const grid = rows.map((r) => r.concat(Array(w - r.length).fill('')));
+      sh.getRange(row, 1, grid.length, w).setValues(grid);
+      sh.getRange(row, 1, 1, w).setFontWeight('bold').setBackground('#0A110E').setFontColor('#FFFFFF');
+      if (grid.length > 1) {
+        rows[0].forEach((h, c) => {
+          const col = sh.getRange(row + 1, c + 1, grid.length - 1, 1);
+          if (/\$/.test(h)) col.setNumberFormat('$#,##0.00;[Red]-$#,##0.00');
+          else if (/%/.test(h)) col.setNumberFormat('0.0;[Red]-0.0');
+        });
+      }
+      row += grid.length + 2;
+    });
+    sh.autoResizeColumns(1, width);
+    return jsonResponse({ success: true, ok: true, tab: EARNINGS_TAB, tabs: counts, url: ss.getUrl() });
+  } finally {
+    lock.releaseLock();
+  }
 }
