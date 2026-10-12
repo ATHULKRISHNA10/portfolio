@@ -1,0 +1,4 @@
+# Private trading app lives in its own Netlify site (Stock-bot repo, web/).
+# Proxy it under this domain so it's used at /trading/ — nothing else changes.
+/trading/*      https://athul-earnings-bot.netlify.app/trading/:splat      200
+/api/trading/*  https://athul-earnings-bot.netlify.app/api/trading/:splat  200
